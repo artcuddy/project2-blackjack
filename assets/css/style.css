@@ -1,0 +1,28 @@
+/* base */
+@import url('https://fonts.googleapis.com/css2?family=Butcherman&family=Work+Sans:wght@100;300;400;900&display=swap');
+
+html {
+    font-size: 65.5%;
+    overflow-x: hidden;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+p {
+    font-family: 'Montserrat', 'sans-serif';
+    font-weight: 500;
+    color: #2e2e2e;
+    line-height: 1.4em;
+    font-size: 1.6rem;
+    font-size: clamp(1.6rem, 1.5259259259259261rem + 0.37037037037037024vw, 2rem);
+}
+
+h1 {
+    font-family: 'Butcherman';
+    font-size: 4rem;
+    font-size: clamp(4rem, 3.2592592592592595rem + 3.7037037037037033vw, 8rem);
+}
