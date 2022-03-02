@@ -1,12 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="assets/css/style.css">
     <title>Black Jack</title>
 </head>
+
 <body>
-    
+    <header>
+        <h1>Demon Blackjack</h1>
+    </header>
+
+    <section class='game-wrapper'>
+
+        <div id='game-area'>
+            <div id='computer-area'>
+                <h2>Dealer (<span id='computer-score'></span>)</h2>
+                <div id='computer-cards'>
+                    <!-- Computer cards appear here. -->
+                </div>
+            </div>
+            <div id='player-area'>
+                <h2>
+                    Player (<span id='player-title'></span>) <span id='player-score'></span>
+                </h2>
+                <div id='player-cards'>
+                    <!-- Player cards appear here. -->
+                </div>
+            </div>
+
+            <div id='button-area'>
+                <button id='new-game'>New Game</button>
+                <button id='new-hand'>New Hand</button>
+                <button id='hit'>Hit</button>
+                <button id='stay'>Stay</button>
+            </div>
+
+        </div>
+
+    </section>
+    <footer>
+        <h2>This will be links to instructions and rules</h2>
+    </footer>
+
+    <script type='text/javascript' src='assets/js/scripts.js'></script>
 </body>
+
 </html>
