@@ -38,3 +38,25 @@ p {
     font-size: 1.6rem;
     font-size: clamp(1.6rem, 1.5259259259259261rem + 0.37037037037037024vw, 2rem);
 }
+
+
+.game-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+  }
+
+  #game-area{
+    position: relative;
+    z-index: 1;
+    width: 800px;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 2rem 2rem 2rem;
+    background: #fff;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 46px 1px rgb(238, 2, 2);
+    -moz-box-shadow: 0px 0px 46px 1px rgb(238, 2, 2);
+    box-shadow: 0px 0px 46px 1px rgb(238, 2, 2);
+  }
