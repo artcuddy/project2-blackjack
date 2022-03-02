@@ -11,18 +11,30 @@ html {
     padding: 0;
     border: none;
 }
-
-p {
-    font-family: 'Montserrat', 'sans-serif';
-    font-weight: 500;
-    color: #2e2e2e;
-    line-height: 1.4em;
-    font-size: 1.6rem;
-    font-size: clamp(1.6rem, 1.5259259259259261rem + 0.37037037037037024vw, 2rem);
-}
+body {
+    height: 100vh;
+    background: #949494 ;
+  }
 
 h1 {
     font-family: 'Butcherman';
     font-size: 4rem;
     font-size: clamp(4rem, 3.2592592592592595rem + 3.7037037037037033vw, 8rem);
+    text-align: center;
+}
+
+h2 {
+    font-family: 'Work Sans', 'sans-serif';
+    font-size: 2rem;
+font-size: clamp(2rem, 1.6296296296296298rem + 1.8518518518518516vw, 4rem);
+    color: #1f1f1f;
+  }
+
+p {
+    font-family: 'Work Sans', 'sans-serif';
+    font-weight: 500;
+    color: #2e2e2e;
+    line-height: 1.4em;
+    font-size: 1.6rem;
+    font-size: clamp(1.6rem, 1.5259259259259261rem + 0.37037037037037024vw, 2rem);
 }
