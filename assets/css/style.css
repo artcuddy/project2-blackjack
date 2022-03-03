@@ -1,5 +1,5 @@
 /* base */
-@import url('https://fonts.googleapis.com/css2?family=Butcherman&family=Work+Sans:wght@100;300;400;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Butcherman&family=Work+Sans:wght@100;300;400;900&display=swap");
 
 html {
   font-size: 65.5%;
@@ -17,7 +17,6 @@ a {
   text-transform: uppercase;
 }
 
-
 body {
   height: 100vh;
   background: #949494;
@@ -28,21 +27,19 @@ header {
 }
 
 h1 {
-  font-family: 'Butcherman';
-  font-size: 4rem;
-  font-size: clamp(4rem, 3.2592592592592595rem + 3.7037037037037033vw, 8rem);
+  font-family: "Butcherman";
+  font-size: 5rem;
   text-align: center;
 }
 
 h2 {
-  font-family: 'Work Sans', 'sans-serif';
+  font-family: "Work Sans", "sans-serif";
   font-size: 2rem;
-  font-size: clamp(2rem, 1.6296296296296298rem + 1.8518518518518516vw, 4rem);
   color: #1f1f1f;
 }
 
 p {
-  font-family: 'Work Sans', 'sans-serif';
+  font-family: "Work Sans", "sans-serif";
   font-weight: 500;
   color: #2e2e2e;
   line-height: 1.4em;
@@ -70,7 +67,7 @@ p {
   position: relative;
   z-index: 1;
   width: 800px;
-  height: 500px;
+  height: auto;
   margin-left: auto;
   margin-right: auto;
   padding: 0 2rem 2rem 2rem;
@@ -83,24 +80,31 @@ p {
 
 /* Cards area styling */
 #computer-area {
+  margin-top: 2rem;
   margin-bottom: 2rem;
 }
 
 #computer-cards {
-  transform: translateY(-40px);
   display: flex;
   justify-content: center;
-  height: 200px;
+  height: 150px;
 }
 
-#player-area #player-message {
-  margin-left: 25%;
+#game-area #message {
+  font-family: "Butcherman";
+  font-size: 3rem;
+}
+
+#message-area {
+  width: 100%;
+  padding: 1rem;
+  text-align: center;
 }
 
 #player-cards {
   display: flex;
   justify-content: center;
-  height: 200px;
+  height: 150px;
 }
 
 /* Game buttons styling */
@@ -114,6 +118,10 @@ p {
   justify-content: space-between;
 }
 
+.right-box {
+  display: flex;
+}
+
 .right-box button {
   margin-left: 16px;
 }
@@ -123,7 +131,7 @@ p {
 }
 
 button {
-  font-family: 'Work Sans', 'sans-serif';
+  font-family: "Work Sans", "sans-serif";
   font-weight: 700;
   text-transform: uppercase;
   color: #2e2e2e;
@@ -170,15 +178,13 @@ footer p:hover {
   color: rgb(238, 2, 2);
 }
 
-
 /* smaller screens @ max 950px media queries */
 
 @media screen and (max-width: 950px) {
-
   #game-area {
     top: 3rem;
     width: 100%;
-    height: 350px;
+    height: auto;
     margin: 3rem;
   }
 
@@ -208,5 +214,4 @@ footer p:hover {
     bottom: -35%;
     right: 0;
   }
-
 }
