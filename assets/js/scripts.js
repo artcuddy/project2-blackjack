@@ -28,7 +28,8 @@ let stayNode = document.getElementById('stay');
 // Game Functions
 
 /**
- * Call the resetPlayingArea function
+ * Call the resetPlayingArea function and start new game 
+ * This should clear the game settings and restart
  */
 function getNewGame() {
 
@@ -55,9 +56,22 @@ function newHand() {
 }
 
 /**
- * Reset game to their defaults
+ * Reset the game variables to their defaults
  */
 function resetPlayingArea() {
+  computerCards = [];
+  playerCards = [];
+  roundLost = false;
+  roundWon = false;
+  roundTied = false;
+  gameOver = false;
+  computerScore = '';
+  playerScore = 0;
+  playerGamesWon = '';
+  computerGamesWon = '';
+  computerScoreNode.textContent = computerScore;
+  playerGamesWonNode.textContent = playerGamesWon;
+  computerGamesWonNode.textContent = computerGamesWon;
 
 }
 
