@@ -19,8 +19,8 @@ function computeScore(cards) {
 
 /**
  * 
- * Make a call to deckofcardsapi using the deckID state variale in order
- * to retrieve draw 4 cards from the deck
+ * Make a call to deckofcardsapi using the deckID state variable in order
+ * to retrieve 4 draw cards from the deck
  */
 function newHand() {
 
@@ -28,7 +28,7 @@ function newHand() {
 }
 
 /**
- * Reset all state variables to their defaults
+ * Reset game to their defaults
  */
 function resetPlayingArea() {
 
@@ -41,4 +41,33 @@ function resetPlayingArea() {
 function hit(target) { 
 
 }
+
+/**
+ * Compute the computers score by calling the computeScore() function and 
+ * update the player message to reflect this
+ */
+function computerPlays() {
+  
+    if (computerScore < 17) {
+      // a delay here makes for nicer game play because of  suspence.
+      setTimeout(()=>hitMe('computer'), 1000)
+    }
+    else if (computerScore > 21) {
+      roundWon = true;
+      // Update the player message to reflect this
+    }
+    else if (computerScore > playerScore) {
+      roundLost = true;
+      // Update the player message to reflect this
+    }
+    else if (computerScore === playerScore) {
+      roundTied = true;
+      // Update the player message to reflect this
+    }
+    else {
+      roundWon = true;
+      // Update the player message to reflect this
+    }
+  
+  }
 
