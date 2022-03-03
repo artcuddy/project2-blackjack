@@ -17,6 +17,13 @@ let computerGamesWonNode = document.getElementById('computer-games-won');
 let computerCardsNode = document.getElementById('computer-cards');
 let playerCardsNode = document.getElementById('player-cards');
 
+// other nodes for messaging and game buttons
+let messageNode = document.getElementById('message');
+let newGameNode = document.getElementById('new-game')
+let newHandNode = document.getElementById('new-hand');
+let hitNode = document.getElementById('hit');
+let stayNode = document.getElementById('stay');
+
 
 // Game Functions
 
