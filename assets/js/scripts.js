@@ -40,13 +40,13 @@ stayNode.onclick = ()=>setTimeout(()=>computerPlays(), 600);
  function getNewGame() {
   resetPlayingArea();
   fetch(`https://deckofcardsapi.com/api/deck/${deckID}/draw/?count=4`)
-  .then(res => res.json())
-  .then(res => {
+  .then(response => response.json())
+  .then(response => {
     hitNode.style.display = 'block';
     stayNode.style.display = 'block';
 
-    computerCards.push(res.cards[0], res.cards[1])
-    playerCards.push(res.cards[2], res.cards[3])
+    computerCards.push(response.cards[0], response.cards[1])
+    playerCards.push(response.cards[2], response.cards[3])
 
     computerScore = '?';
     computerScoreNode.textContent = computerScore;
@@ -96,6 +96,16 @@ function computeScore(cards) {
  * to retrieve 4 draw cards from the deck
  */
  function getNewDeck() {
+  resetPlayingArea();
+  fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=6')
+  .then(response => response.json())
+  .then(response => {
+    deckID = response.deck_id;
+    newHandNode.style.display = 'block';
+    hitNode.style.display = 'none';
+    stayNode.style.display = 'none';
+  })
+  .catch(console.error)
 
 
 }
