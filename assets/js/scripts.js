@@ -24,6 +24,12 @@ let newHandNode = document.getElementById('new-hand');
 let hitNode = document.getElementById('hit');
 let stayNode = document.getElementById('stay');
 
+// On click events
+newGameNode.onclick = getNewDeck;
+newHandNode.onclick = getNewGame;
+hitNode.onclick = ()=>hit('player');
+stayNode.onclick = ()=>setTimeout(()=>computerPlays(), 600);
+
 
 // Game Functions
 
@@ -31,7 +37,46 @@ let stayNode = document.getElementById('stay');
  * Call the resetPlayingArea function and start new game 
  * This should clear the game settings and restart
  */
-function getNewGame() {
+ function getNewGame() {
+  resetPlayingArea();
+  fetch(`https://deckofcardsapi.com/api/deck/${deckID}/draw/?count=4`)
+  .then(res => res.json())
+  .then(res => {
+    hitNode.style.display = 'block';
+    stayNode.style.display = 'block';
+
+    computerCards.push(res.cards[0], res.cards[1])
+    playerCards.push(res.cards[2], res.cards[3])
+
+    computerScore = '?';
+    computerScoreNode.textContent = computerScore;
+
+    computerCards.forEach((card, i) => {
+      let cardDomElement = document.createElement('img');
+      if(i===0) {
+        cardDomElement.src = './assets/images/card.png';
+      } else {
+        cardDomElement.src = card.image;
+      }
+      computerCardsNode.appendChild(cardDomElement)
+    })
+
+    playerCards.forEach(card => {
+      let cardDomElement = document.createElement('img');
+      cardDomElement.src = card.image;
+      playerCardsNode.appendChild(cardDomElement)
+    })
+
+    playerScore = computeScore(playerCards);
+    if (playerScore === 21) {
+      roundWon = true;
+      messageNode.textContent = 'BlackJack! You Win!';
+      incrementPlayerGamesWon();
+    }
+    playerScoreNode.textContent = playerScore;
+
+  })
+  .catch(console.error)
 
 
 }
@@ -50,7 +95,7 @@ function computeScore(cards) {
  * Make a call to deckofcardsapi using the deckID state variable in order
  * to retrieve 4 draw cards from the deck
  */
-function newHand() {
+ function getNewDeck() {
 
 
 }
