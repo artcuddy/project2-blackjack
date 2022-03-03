@@ -1,4 +1,4 @@
-//Variables for initial state
+//Variables for initial game state
 let deckID = '';
 let computerCards = [];
 let playerCards = [];
@@ -6,6 +6,12 @@ let roundLost = false;
 let roundWon = false;
 let roundTied = false;
 let gameOver = false;
+
+// score nodes
+let computerScoreNode = document.getElementById('computer-score');
+let playerScoreNode = document.getElementById('player-score');
+let playerGamesWonNode = document.getElementById('player-games-won');
+let computerGamesWonNode = document.getElementById('computer-games-won');
 
 
 // Game Functions
