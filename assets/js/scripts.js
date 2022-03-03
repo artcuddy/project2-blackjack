@@ -1,3 +1,13 @@
+//Variables for initial state
+let deckID = '';
+let computerCards = [];
+let playerCards = [];
+let roundLost = false;
+let roundWon = false;
+let roundTied = false;
+let gameOver = false;
+
+
 // Game Functions
 
 /**
