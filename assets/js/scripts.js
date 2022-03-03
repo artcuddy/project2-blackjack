@@ -7,11 +7,15 @@ let roundWon = false;
 let roundTied = false;
 let gameOver = false;
 
-// score nodes
+// score nodes from the DOM where the scores will be displayed
 let computerScoreNode = document.getElementById('computer-score');
 let playerScoreNode = document.getElementById('player-score');
 let playerGamesWonNode = document.getElementById('player-games-won');
 let computerGamesWonNode = document.getElementById('computer-games-won');
+
+// card area nodes rom the DOM where the cards will be displayed
+let computerCardsNode = document.getElementById('computer-cards');
+let playerCardsNode = document.getElementById('player-cards');
 
 
 // Game Functions
