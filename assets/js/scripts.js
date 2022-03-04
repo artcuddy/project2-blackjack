@@ -106,8 +106,6 @@ function computeScore(cards) {
     stayNode.style.display = 'none';
   })
   .catch(console.error)
-
-
 }
 
 /**

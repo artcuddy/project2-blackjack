@@ -1,5 +1,16 @@
 /* base */
-@import url("https://fonts.googleapis.com/css2?family=Butcherman&family=Work+Sans:wght@100;300;400;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Butcherman&family=Work+Sans:wght@100;300;400;900&display=swap"); 
+/* @font-face {
+  font-family: "Creepy";
+  src: url("../fonts/Creepy.woff") format("woff"),
+       url("../fonts/Creepy.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Lunacy";
+  src: url("../fonts/Lunacy.woff") format("woff"),
+       url("../fonts/Lunacy.woff2") format("woff2");
+} */
 
 html {
   font-size: 65.5%;
@@ -19,7 +30,7 @@ a {
 
 body {
   height: 100vh;
-  background: #949494;
+  background-image: url(../images/king-dice.png);
 }
 
 header {
@@ -27,19 +38,19 @@ header {
 }
 
 h1 {
-  font-family: "Butcherman";
+  font-family: 'Butcherman', 'sans-serif';
   font-size: 5rem;
   text-align: center;
 }
 
 h2 {
-  font-family: "Work Sans", "sans-serif";
+  font-family: 'Works Sans', 'sans-serif';
   font-size: 2rem;
   color: #1f1f1f;
 }
 
 p {
-  font-family: "Work Sans", "sans-serif";
+  font-family: "Works Sans", "sans-serif";
   font-weight: 500;
   color: #2e2e2e;
   line-height: 1.4em;
