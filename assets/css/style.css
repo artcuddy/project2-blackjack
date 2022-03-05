@@ -29,8 +29,7 @@ a {
 }
 
 body {
-  height: 100vh;
-  background-image: url(../images/king-dice.png);
+  background-color: #141414;
 }
 
 header {
@@ -60,15 +59,20 @@ p {
 
 /* Game area styling */
 .game-wrapper {
+  background-color: #141414;
+  padding-top: 5%;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: url('../images/king-dice-large.webp') no-repeat center center;
 }
 
 #scores-area {
   width: 100%;
   position: absolute;
-  top: -15%;
+  top: -20%;
   display: flex;
   justify-content: space-around;
 }
