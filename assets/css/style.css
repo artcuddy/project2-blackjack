@@ -64,6 +64,7 @@ p {
   width: 100vw;
   height: 100vh;
   background: url('../images/king-dice-large.webp') no-repeat center center;
+  background-size: cover;
 }
 
 .card-game-area {
@@ -198,11 +199,12 @@ footer p:hover {
 
   .game-wrapper {
     width: 100%;
+    height: 76vh;
   }
 
   .card-game-area {
-    top: 40vh;
-    width: 100%;
+    top: 32vh;
+    width: 80%;
     height: auto;
   }
 
@@ -229,7 +231,7 @@ footer p:hover {
 
   .game-buttons {
     display: block;
-    bottom: -35%;
+    bottom: -25%;
     right: 0;
   }
 
