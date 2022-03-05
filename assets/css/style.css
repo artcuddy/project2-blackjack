@@ -27,7 +27,8 @@ header {
 
 h1 {
   font-family: 'Press Start 2P', 'sans-serif';
-  font-size: 5rem;
+  font-size: 3rem;
+  font-size: clamp(3rem, 2.6296296296296298rem + 1.8518518518518516vw, 5rem);
   text-align: center;
   color: #fff;
 }
@@ -65,15 +66,7 @@ p {
   background: url('../images/king-dice-large.webp') no-repeat center center;
 }
 
-#scores-area {
-  width: 100%;
-  position: absolute;
-  top: -20%;
-  display: flex;
-  justify-content: space-around;
-}
-
-#card-game-area {
+.card-game-area {
   top: 40vh;
   position: relative;
   z-index: 1;
@@ -88,12 +81,12 @@ p {
 }
 
 /* Cards area styling */
-#computer-area {
+.computer-area {
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
 
-#computer-area h3 {
+.computer-area h3 {
   margin-top: 1rem;
 }
 
@@ -103,12 +96,12 @@ p {
   height: 150px;
 }
 
-#game-area #message {
+.card-game-area #message {
   font-family: "Butcherman";
   font-size: 3rem;
 }
 
-#message-area {
+.message-area {
   width: 100%;
   padding: 1rem;
   text-align: center;
@@ -120,7 +113,7 @@ p {
   height: 150px;
 }
 
-#player-area h3 {
+.player-area h3 {
   margin-top: 1rem;
 }
 
@@ -199,10 +192,19 @@ footer p:hover {
   color: rgb(238, 2, 2);
 }
 
-/* smaller screens @ max 950px media queries */
+/* smaller screens @ max 900px media queries */
 
-@media screen and (max-width: 950px) {
-  
+@media screen and (max-width: 900px) {
+
+  .game-wrapper {
+    width: 100%;
+  }
+
+  .card-game-area {
+    top: 40vh;
+    width: 100%;
+    height: auto;
+  }
 
   .left-box {
     width: 100%;
@@ -230,4 +232,5 @@ footer p:hover {
     bottom: -35%;
     right: 0;
   }
+
 }
