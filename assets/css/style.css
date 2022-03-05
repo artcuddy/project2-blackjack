@@ -1,16 +1,5 @@
 /* base */
 @import url("https://fonts.googleapis.com/css2?family=Butcherman&family=Work+Sans:wght@100;300;400;900&display=swap"); 
-/* @font-face {
-  font-family: "Creepy";
-  src: url("../fonts/Creepy.woff") format("woff"),
-       url("../fonts/Creepy.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Lunacy";
-  src: url("../fonts/Lunacy.woff") format("woff"),
-       url("../fonts/Lunacy.woff2") format("woff2");
-} */
 
 html {
   font-size: 65.5%;
@@ -59,10 +48,8 @@ p {
 
 /* Game area styling */
 .game-wrapper {
+  position: relative;
   background-color: #141414;
-  padding-top: 5%;
-  display: flex;
-  flex-flow: row nowrap;
   align-items: center;
   width: 100vw;
   height: 100vh;
@@ -77,20 +64,17 @@ p {
   justify-content: space-around;
 }
 
-#game-area {
-  top: 15rem;
+#card-game-area {
+  top: 40vh;
   position: relative;
   z-index: 1;
-  width: 800px;
+  width: 850px;
   height: auto;
   margin-left: auto;
   margin-right: auto;
   padding: 0 2rem 2rem 2rem;
   background: #fff;
   border-radius: 10px;
-  -webkit-box-shadow: 0px 0px 26px 1px rgb(238, 2, 2);
-  -moz-box-shadow: 0px 0px 26px 1px rgb(238, 2, 2);
-  box-shadow: 0px 0px 26px 1px rgb(238, 2, 2);
 }
 
 /* Cards area styling */
