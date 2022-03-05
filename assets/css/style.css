@@ -1,5 +1,5 @@
 /* base */
-@import url("https://fonts.googleapis.com/css2?family=Butcherman&family=Work+Sans:wght@100;300;400;900&display=swap"); 
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Work+Sans:wght@100;300;400;800;900&display=swap');
 
 html {
   font-size: 65.5%;
@@ -22,24 +22,33 @@ body {
 }
 
 header {
-  padding: 1rem;
+  padding: 3rem;
 }
 
 h1 {
-  font-family: 'Butcherman', 'sans-serif';
+  font-family: 'Press Start 2P', 'sans-serif';
   font-size: 5rem;
   text-align: center;
+  color: #fff;
 }
 
 h2 {
-  font-family: 'Works Sans', 'sans-serif';
+  font-family: 'Press Start 2P', 'sans-serif';
   font-size: 2rem;
   color: #1f1f1f;
 }
 
+h3 {
+  font-family: 'Work Sans', 'sans-serif';
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: #1f1f1f;
+  text-transform: uppercase;
+}
+
 p {
-  font-family: "Works Sans", "sans-serif";
-  font-weight: 500;
+  font-family: 'Work Sans', 'sans-serif';
+  font-weight: 400;
   color: #2e2e2e;
   line-height: 1.4em;
   font-size: 1.6rem;
@@ -75,12 +84,17 @@ p {
   padding: 0 2rem 2rem 2rem;
   background: #fff;
   border-radius: 10px;
+  border: solid #000 5px;
 }
 
 /* Cards area styling */
 #computer-area {
   margin-top: 2rem;
   margin-bottom: 2rem;
+}
+
+#computer-area h3 {
+  margin-top: 1rem;
 }
 
 #computer-cards {
@@ -106,11 +120,15 @@ p {
   height: 150px;
 }
 
+#player-area h3 {
+  margin-top: 1rem;
+}
+
 /* Game buttons styling */
-#button-area {
+.game-buttons {
   position: absolute;
   right: 10px;
-  bottom: -20%;
+  bottom: -15%;
   z-index: 10;
   width: 100%;
   display: flex;
@@ -131,7 +149,7 @@ p {
 
 button {
   font-family: "Work Sans", "sans-serif";
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
   color: #2e2e2e;
   line-height: 1.4em;
@@ -173,6 +191,10 @@ footer a {
   margin: 2rem;
 }
 
+footer p {
+  color: #fff;
+}
+
 footer p:hover {
   color: rgb(238, 2, 2);
 }
@@ -180,12 +202,7 @@ footer p:hover {
 /* smaller screens @ max 950px media queries */
 
 @media screen and (max-width: 950px) {
-  #game-area {
-    top: 3rem;
-    width: 100%;
-    height: auto;
-    margin: 3rem;
-  }
+  
 
   .left-box {
     width: 100%;
@@ -208,7 +225,7 @@ footer p:hover {
     margin-left: 0;
   }
 
-  #button-area {
+  .game-buttons {
     display: block;
     bottom: -35%;
     right: 0;
