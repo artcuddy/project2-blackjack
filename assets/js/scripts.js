@@ -1,28 +1,28 @@
 //Variables for initial game state
-let deckID = '';
-let computerCards = [];
-let playerCards = [];
-let roundLost = false;
-let roundWon = false;
-let roundTied = false;
-let gameOver = false;
+const deckID = '';
+const computerCards = [];
+const playerCards = [];
+const roundLost = false;
+const roundWon = false;
+const roundTied = false;
+const gameOver = false;
 
 // score nodes from the DOM where the scores will be displayed
-let computerScoreNode = document.getElementById('computer-score');
-let playerScoreNode = document.getElementById('player-score');
-let playerGamesWonNode = document.getElementById('player-games-won');
-let computerGamesWonNode = document.getElementById('computer-games-won');
+const computerScoreNode = document.getElementById('computer-score');
+const playerScoreNode = document.getElementById('player-score');
+const playerGamesWonNode = document.getElementById('player-games-won');
+const computerGamesWonNode = document.getElementById('computer-games-won');
 
 // card area nodes rom the DOM where the cards will be displayed
-let computerCardsNode = document.getElementById('computer-cards');
-let playerCardsNode = document.getElementById('player-cards');
+const computerCardsNode = document.getElementById('computer-cards');
+const playerCardsNode = document.getElementById('player-cards');
 
 // other nodes for messaging and game buttons
-let messageNode = document.getElementById('message');
-let newGameNode = document.getElementById('new-game')
-let newHandNode = document.getElementById('new-hand');
-let hitNode = document.getElementById('hit');
-let stayNode = document.getElementById('stay');
+const messageNode = document.getElementById('message');
+const newGameNode = document.getElementById('new-game')
+const newHandNode = document.getElementById('new-hand');
+const hitNode = document.getElementById('hit');
+const stayNode = document.getElementById('stay');
 
 // On click events
 newGameNode.onclick = getNewDeck;
