@@ -1,14 +1,10 @@
 
-//Deckofcards API DECKID
+//deckofcards API DECKID
 const DECKID = '';
 
-// card area selectors
+//card area selectors
 const COMPUTERCARDS = document.getElementById('computer-cards');
 const PLAYERCARDS = document.getElementById('player-cards');
-
-//players
-const PLAYER = cardGame['player'];
-const COMPUTER =cardGame['computer'];
 
 //scores selectors
 const COMPUTERSCORE = document.getElementById('computer-score');
@@ -20,20 +16,20 @@ const MESSAGE = document.getElementById('message');
 //audio
 const HITSOUND = new Audio('audio/swish.mp3');
 
-// button click selectors
+//button click selectors
 const HIT = document.getElementById('hit');
 const STAY = document.getElementById('stay');
 const NEWGAME = document.getElementById('new-game');
-const NEWHAND = document.getElementById('new-hand');
+const NEWCARDS = document.getElementById('new-hand');
 
 //on click events
 NEWGAME.onclick = getNewGame;
-NEWHAND.onclick - getNewHand;
+NEWCARDS.onclick - getNewCards;
 HIT.onclick = ()=>hitMe('player');
 STAY.onclick = ()=>setTimeout(()=>computerPlays(), 700);
 
 /**
- * Ths function should setup a new game, call the API for a new deck and clear the old game 
+ * This function should setup a new game, call the API for a new deck and clear the old game 
  */
 function getNewGame() {
 
@@ -46,9 +42,9 @@ function getNewGame() {
 }
 
 /**
- * Ths function should call a new hand from the API and remove the old hand 
+ * This function should call a new hand from the API and remove the old hand 
  */
-function getNewHand() {
+function getNewCards() {
 
   fetch(`https://deckofcardsapi.com/api/deck/${DECKID}/draw/?count=4`)
   .then(response => response.json())
@@ -88,6 +84,6 @@ function computerPlays() {
 /**
  * This function calculates and matches the scores
  */
-function computeScore() {
+function calculateScore() {
 
 }
