@@ -41,6 +41,7 @@ const LOSESOUND = new Audio('audio/aww.mp3');
 
 //button event listeners
 document.getElementById('hit').addEventListener('click', hitMe);
+document.getElementById('new-game').addEventListener('click', getNewGame);
 
 
 //button click selectors
@@ -63,9 +64,14 @@ function getNewGame() {
   fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=6')
     .then(response => response.json())
     .then(response => {
+      DECKID.response = response.deck_id;
+    // blackJackGame[''].style.display = "block";
+    // hitMeNode.style.display = "none";
+    // stayNode.style.display = "none";
 
     })
     .catch(console.error)
+    console.log('clicked new game');
 }
 
 /**
