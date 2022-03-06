@@ -1,3 +1,13 @@
+let blackJackGame = {
+  'player' : {
+    'cardNumberSpan' : '#player-score',
+    'gamesWon' : '#player-games-won',
+  },
+  'computer' : {
+    'cardNumberSpan' : '#computer-score',
+    'gamesWon' : '#computer-games-won',
+  }
+}
 
 //deckofcards API DECKID
 const DECKID = '';
