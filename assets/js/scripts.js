@@ -60,18 +60,17 @@ document.getElementById('new-game').addEventListener('click', getNewGame);
  * This function should setup a new game, call the API for a new deck and clear the old game 
  */
 function getNewGame() {
+  resetCardGame();
 
   fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=6')
     .then(response => response.json())
     .then(response => {
       DECKID.response = response.deck_id;
-    // blackJackGame[''].style.display = "block";
-    // hitMeNode.style.display = "none";
-    // stayNode.style.display = "none";
+
 
     })
     .catch(console.error)
-    console.log('clicked new game');
+  console.log('clicked new game');
 }
 
 /**
@@ -96,43 +95,66 @@ function hitMe() {
     fetch(`https://deckofcardsapi.com/api/deck/${DECKID}/draw/?count=1`)
       .then(response => response.json())
       .then(response => {
+        // If player
         if (PLAYER === 'player') {
-          blackJackGame['playerCards'].push(response.cards[0])
+          document.getElementById('player-cards').push(response.cards[0])
           let cardDomElement = document.createElement("img");
           cardDomElement.src = response.cards[0].image;
-          blackJackGame['playerCards'].appendChild(cardDomElement)
+          document.getElementById('player-cards').appendChild(cardDomElement)
 
           // playerScore = computeScore(playerCards);
 
-          blackJackGame['playerScore'].textContent = playerScore;
+         document.getElementById('player-score').textContent = playerScore;
           if (playerScore > 21) {
             roundLost = true;
-            MESSAGE.textContent = "You broke. You Lose Your Soul!"
+            document.getElementById('message').textContent = "You broke. You Lose Your Soul!";
           }
 
+        }
+
+        // If dealer
+        if (COMPUTER === 'dealer') {
+          let cardDomElement = document.createElement("img");
+          document.getElementById('computer-cards').push(res.cards[0])
+          cardDomElement.src = response.cards[0].image;
+          document.getElementById('computer-cards').appendChild(cardDomElement);
+          // dealerPlays();
         }
 
       })
   }
 }
 
-  /**
-   * This function should clear the old game and reset all variables to the default settings
-   */
-  function resetCardGame() {
+/**
+ * This function should clear the old game and reset all variables to the default settings
+ */
+function resetCardGame() {
+  document.getElementById('computer-cards').textContent = [];
+document.getElementById('player-cards').textContent = [];
 
+  document.getElementById('computer-score').textContent = 0;
+  document.getElementById('player-score').textContent = 0;
+
+    document.getElementById('message').textContent = "";
+  while (document.getElementById('computer-cards').firstChild) {
+    document.getElementById('computer-cards').removeChild(document.getElementById('computer-cards').firstChild);
+  }
+  while (document.getElementById('player-cards').firstChild) {
+    document.getElementById('player-cards').removeChild(document.getElementById('player-cards').firstChild);
   }
 
-  /**
-   * This function controls when the computer plays
-   */
-  function computerPlays() {
+}
 
-  }
+/**
+ * This function controls when the computer plays
+ */
+function computerPlays() {
 
-  /**
-   * This function calculates and matches the scores
-   */
-  function calculateScore() {
+}
 
-  }
+/**
+ * This function calculates and matches the scores
+ */
+function calculateScore() {
+
+}
