@@ -1,95 +1,93 @@
-//Variables for initial game state
-let deckID = '';
-let computerCards = [];
-let playerCards = [];
-let roundLost = false;
-let roundWon = false;
-let roundTied = false;
-let cardGameOver = false;
 
-// score nodes from the DOM where the scores will be displayed
-const computerScoreNode = document.getElementById('computer-score');
-const playerScoreNode = document.getElementById('player-score');
-const playerGamesWonNode = document.getElementById('player-games-won');
-const computerGamesWonNode = document.getElementById('computer-games-won');
+//Deckofcards API DECKID
+const DECKID = '';
 
-// card area nodes rom the DOM where the cards will be displayed
-const computerCardsNode = document.getElementById('computer-cards');
-const playerCardsNode = document.getElementById('player-cards');
+// card area selectors
+const COMPUTERCARDS = document.getElementById('computer-cards');
+const PLAYERCARDS = document.getElementById('player-cards');
 
-// other nodes for messaging and game buttons
-const messageNode = document.getElementById('message');
-const newGameNode = document.getElementById('new-game')
-const newHandNode = document.getElementById('new-hand');
-const hitNode = document.getElementById('hit');
-const stayNode = document.getElementById('stay');
+//players
+const PLAYER = cardGame['player'];
+const COMPUTER =cardGame['computer'];
 
-// On click events
-newGameNode.onclick = getNewDeck;
-newHandNode.onclick = getNewGame;
-hitNode.onclick = () => hit('player');
-stayNode.onclick = () => setTimeout(() => computerPlays(), 600);
+//scores selectors
+const COMPUTERSCORE = document.getElementById('computer-score');
+const PLAYERSCORE = document.getElementById('player-score');
 
+//message area selectors
+const MESSAGE = document.getElementById('message');
 
-// Game Functions
+//audio
+const HITSOUND = new Audio('audio/swish.mp3');
+
+// button click selectors
+const HIT = document.getElementById('hit');
+const STAY = document.getElementById('stay');
+const NEWGAME = document.getElementById('new-game');
+const NEWHAND = document.getElementById('new-hand');
+
+//on click events
+NEWGAME.onclick = getNewGame;
+NEWHAND.onclick - getNewHand;
+HIT.onclick = ()=>hitMe('player');
+STAY.onclick = ()=>setTimeout(()=>computerPlays(), 700);
 
 /**
- * Call the resetPlayingArea function and start new game 
- * This should clear the game settings and restart
+ * Ths function should setup a new game, call the API for a new deck and clear the old game 
  */
 function getNewGame() {
+
+    fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=6')
+    .then(response => response.json())
+    .then(response => {
+
+    })
+    .catch(console.error)
+}
+
+/**
+ * Ths function should call a new hand from the API and remove the old hand 
+ */
+function getNewHand() {
+
+  fetch(`https://deckofcardsapi.com/api/deck/${DECKID}/draw/?count=4`)
+  .then(response => response.json())
+  .then(response => {
   
 
+  })
+  .catch(console.error)
 }
 
 /**
- * 
- * Game over and call resetPlayingArea and message the player that the game is over
+ * This function should get a new card from the API when the hit button is clicked 
  */
-function gameOver() {
- 
+function hitMe() {
+  if (roundLost || roundWon || roundTied) {return}
+  fetch(`https://deckofcardsapi.com/api/deck/${DECKID}/draw/?count=1`)
+  .then(response => response.json())
+  .then(response => {
+
+  })
 }
 
 /**
- * 
- * This function receives an array of cards and returns the total score
+ * This function should clear the old game and reset all variables to the default settings
  */
-function computeScore(cards) {
-
-
-}
-
-/**
- * 
- * Make a call to deckofcardsapi using the deckID state variable in order
- * to retrieve 4 draw cards from the deck
- */
-function getNewDeck() {
- 
-}
-
-/**
- * Reset the game variables to their defaults
- */
-function resetPlayingArea() {
-  
+function resetCardGame() {
 
 }
 
 /**
- * 
- * If any of roundLost or roundWon or roundTied is true, return immediately
- */
-function hit(target) {
-  
-
-}
-
-/**
- * Compute the computers score by calling the computeScore() function and 
- * update the player message to reflect this
+ * This function controls when the computer plays
  */
 function computerPlays() {
-  
+
 }
 
+/**
+ * This function calculates and matches the scores
+ */
+function computeScore() {
+
+}
