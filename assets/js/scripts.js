@@ -95,6 +95,28 @@ function resetGameArea() {
 }
 
 /**
+ * This function is to calculate the card score and return the score
+ */
+function calculateScore() {
+  let hasAce = false;
+  score = cardApp.cards.reduce((acc, card) => {
+    if (card.value === "ACE") {
+      hasAce = true;
+      return acc + 1
+    }
+    if (isNaN(card.value)) {
+      return acc + 10
+    }
+    return acc + Number(card.value);
+  }, 0)
+  if (hasAce) {
+    score = (score + 10) > 21 ? score : score + 10;
+  }
+  return score
+}
+
+
+/**
  * This function resets the game area, makes an API call to the deckofcards API and returns 2 cards for the player and 2 for the computer
  */
 function newHand() {
@@ -190,27 +212,38 @@ function hitMe(target) {
     .catch(console.log)
 }
 
-/**
- * This function is to calculate the card score and return the score
- */
-function calculateScore() {
-  let hasAce = false;
-  score = cards.reduce((acc, card) => {
-    if (card.value === "ACE") {
-      hasAce = true;
-      return acc + 1
-    }
-    if (isNaN(card.value)) {
-      return acc + 10
-    }
-    return acc + Number(card.value);
-  }, 0)
-  if (hasAce) {
-    score = (score + 10) > 21 ? score : score + 10;
-  }
-  return score
-}
+function computerPlays() {
 
+  if (cardApp.roundLost || cardApp.roundWon || cardApp.roundTied) {
+    return
+  }
+  cardApp.computerScore = calculateScore(cardApp.computerCards);
+  cardApp.computerScoreNode.textContent = cardApp.computerScore;
+  cardApp.computerCardsNode.firstChild.src = cardApp.computerCards[0].image;
+
+  if (cardApp.computerScore < 17) {
+    setTimeout(() => hitMe('computer'), 900)
+  } else if (cardApp.computerScore > 21) {
+    cardApp.roundWon = true;
+    cardApp.messageNode.textContent = 'House bust. You Won the hand!';
+    cardApp.gameOverSound.play();
+    incrementPlayerGamesWon();
+  } else if (cardApp.computerScore > cardApp.playerScore) {
+    cardApp.roundLost = true;
+    cardApp.messageNode.textContent = 'You Lost the hand';
+    cardApp.gameOverSound.play();
+    incrementComputerGamesWon();
+  } else if (cardApp.computerScore === cardApp.playerScore) {
+    cardApp.roundTied = true;
+    cardApp.messageNode.textContent = "It's a Tie, you don't lose your soul yet";
+  } else {
+    cardApp.roundWon = true;
+    cardApp.messageNode.textContent = 'You Won the hand!';
+    cardApp.winSound.play();
+    incrementPlayerGamesWon();
+  }
+
+}
 
 /**
  * Gets the current tally of player scores from the DOM and increments it by 1
