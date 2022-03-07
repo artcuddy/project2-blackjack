@@ -40,20 +40,6 @@ cardApp.winSound = new Audio('../assets/audio/win.wav');
 cardApp.gameOverSound = new Audio('../assets/audio/gameover.wav');
 
 
-class blackJack {
-  constructor() {
-      this.audioController = new AudioController();
-  }
-gameOver() {
-  this.audioController.gameOver();
-  document.getElementById('game-over-text').classList.add('visible');
-}
-hit() {
-  this.audioController.hit();
-}
-}
-
-
 /**
  * Check if the DOM content has loaded and then run getNewDeck
  */
@@ -111,6 +97,9 @@ function newHand() {
   fetch(`https://deckofcardsapi.com/api/deck/${cardApp.deckID}/draw/?count=4`)
     .then(response => response.json())
     .then(response => {
+
+      cardApp.newHandSound.play();
+
       cardApp.hitMeNode.style.display = 'block';
       cardApp.stayNode.style.display = 'block';
 
@@ -140,6 +129,7 @@ function newHand() {
       if (cardApp.playerScore === 21) {
         cardApp.roundWon = true;
         cardApp.messageNode.textContent = 'BlackJack! You Win!';
+        cardApp.winSound.play();
       }
       cardApp.playerScoreNode.textContent = cardApp.playerScore;
 
@@ -175,6 +165,7 @@ function hitMe(target) {
         if (cardApp.playerScore > 21) {
           cardApp.roundLost = true;
           cardApp.message.Node.textContent = 'You Bust!'
+          cardApp.gameOverSound.play();
         }
 
       }
