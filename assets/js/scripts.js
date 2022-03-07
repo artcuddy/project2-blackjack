@@ -8,6 +8,7 @@ cardApp.playerCards = [];
 cardApp.roundLost = false;
 cardApp.roundWon = false;
 cardApp.roundTied = false;
+cardApp.gameOver = false;
 cardApp.playerScore = 0;
 cardApp.computerScore = 0;
 
@@ -29,8 +30,8 @@ cardApp.stayNode = document.getElementById('stay');
 // On click events
 cardApp.newDeckNode.onclick = getNewDeck;
 cardApp.nextHandNode.onclick = newHand;
-cardApp.hitMeNode.onclick = ()=>hitMe('player');
-cardApp.stayNode.onclick = ()=>setTimeout(()=>computerPlays(), 600);
+cardApp.hitMeNode.onclick = () => hitMe('player');
+cardApp.stayNode.onclick = () => setTimeout(() => computerPlays(), 700);
 
 /**
  * This function resets the ga,e area by setting all game variables to default settings
@@ -42,6 +43,7 @@ function resetGameArea() {
   cardApp.roundLost = false;
   cardApp.roundWon = false;
   cardApp.roundTied = false;
+  cardApp.gameOver = false;
   cardApp.computerScore = '';
   cardApp.playerScore = 0;
   cardApp.computerScoreNode.textContent = cardApp.computerScore;
@@ -61,14 +63,14 @@ function resetGameArea() {
 function getNewDeck() {
   resetGameArea();
   fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=6')
-  .then(response => response.json())
-  .then(response => {
-    cardApp.deckID = response.deck_id;
-    cardApp.nextHandNode.style.display = 'block';
-    cardApp.hitMeNode.style.display = 'none';
-    cardApp.stayNode.style.display = 'none';
-  })
-  .catch(console.error)
+    .then(response => response.json())
+    .then(response => {
+      cardApp.deckID = response.deck_id;
+      cardApp.nextHandNode.style.display = 'block';
+      cardApp.hitMeNode.style.display = 'none';
+      cardApp.stayNode.style.display = 'none';
+    })
+    .catch(console.error)
 }
 
 /**
@@ -77,80 +79,81 @@ function getNewDeck() {
 function newHand() {
   resetGameArea();
   fetch(`https://deckofcardsapi.com/api/deck/${cardApp.deckID}/draw/?count=4`)
-  .then(response => response.json())
-  .then(response => {
-    cardApp.hitMeNode.style.display = 'block';
-    cardApp.stayNode.style.display = 'block';
+    .then(response => response.json())
+    .then(response => {
+      cardApp.hitMeNode.style.display = 'block';
+      cardApp.stayNode.style.display = 'block';
 
-    cardApp.computerCards.push(response.cards[0], response.cards[1])
-    cardApp.playerCards.push(response.cards[2], response.cards[3])
+      cardApp.computerCards.push(response.cards[0], response.cards[1])
+      cardApp.playerCards.push(response.cards[2], response.cards[3])
 
-    cardApp.computerScore = '?';
-    cardApp.computerScoreNode.textContent = cardApp.computerScore;
+      cardApp.computerScore = '?';
+      cardApp.computerScoreNode.textContent = cardApp.computerScore;
 
-    cardApp.computerCards.forEach((card, i) => {
-      let cardDomElement = document.createElement('img');
-      if(i===0) {
-        cardDomElement.src = '../assets/images/card.png';
-      } else {
+      cardApp.computerCards.forEach((card, i) => {
+        let cardDomElement = document.createElement('img');
+        if (i === 0) {
+          cardDomElement.src = '../assets/images/card.png';
+        } else {
+          cardDomElement.src = card.image;
+        }
+        cardApp.computerCardsNode.appendChild(cardDomElement)
+      })
+
+      cardApp.playerCards.forEach(card => {
+        let cardDomElement = document.createElement('img');
         cardDomElement.src = card.image;
+        cardApp.playerCardsNode.appendChild(cardDomElement)
+      })
+
+      cardApp.playerScore = computeScore(cardApp.playerCards);
+      if (cardApp.playerScore === 21) {
+        cardApp.roundWon = true;
+        cardApp.messageNode.textContent = 'BlackJack! You Win!';
       }
-      cardApp.computerCardsNode.appendChild(cardDomElement)
+      cardApp.playerScoreNode.textContent = cardApp.playerScore;
+
     })
-
-    cardApp.playerCards.forEach(card => {
-      let cardDomElement = document.createElement('img');
-      cardDomElement.src = card.image;
-      cardApp.playerCardsNode.appendChild(cardDomElement)
-    })
-
-    cardApp.playerScore = computeScore(cardApp.playerCards);
-    if (cardApp.playerScore === 21) {
-      cardApp.roundWon = true;
-      cardApp.messageNode.textContent = 'BlackJack! You Win!';
-    }
-    cardApp.playerScoreNode.textContent = cardApp.playerScore;
-
-  })
-  .catch(console.error)
+    .catch(console.error)
 }
 
 /**
- * 
  * This function adds a card to the players hand when the hit button is clicked
+ * also checks if the round was won, lost or tied
  */
 function hitMe(target) {
-  if (cardApp.roundLost || cardApp.roundWon || cardApp.roundTied) {return}
+  if (cardApp.roundLost || cardApp.roundWon || cardApp.roundTied) {
+    return
+  }
   fetch(`https://deckofcardsapi.com/api/deck/${cardApp.deckID}/draw/?count=1`)
-  .then(response => response.json())
-  .then(response => {
+    .then(response => response.json())
+    .then(response => {
 
-    // If player
-    if (target === 'player') {
-      cardApp.playerCards.push(response.cards[0])
-      let cardDomElement = document.createElement('img');
-      cardDomElement.src = response.cards[0].image;
-      cardApp.playerCardsNode.appendChild(cardDomElement)
+      // If player
+      if (target === 'player') {
+        cardApp.playerCards.push(response.cards[0])
+        let cardDomElement = document.createElement('img');
+        cardDomElement.src = response.cards[0].image;
+        cardApp.playerCardsNode.appendChild(cardDomElement)
 
-      cardApp.playerScore = computeScore(cardApp.playerCards);
+        cardApp.playerScore = computeScore(cardApp.playerCards);
 
-      cardApp.playerScoreNode.textContent = cardApp.playerScore;
-      if (cardApp.playerScore > 21) {
-        cardApp.roundLost = true;
-        cardApp.message.Node.textContent = 'You Bust!'
+        cardApp.playerScoreNode.textContent = cardApp.playerScore;
+        if (cardApp.playerScore > 21) {
+          cardApp.roundLost = true;
+          cardApp.message.Node.textContent = 'You Bust!'
+        }
       }
-    }
 
-    // If computer
-    if (target === 'computer') {
-      let cardDomElement = document.createElement('img');
-      cardApp.computerCards.push(response.cards[0])
-      cardDomElement.src = response.cards[0].image;
-      computerCardsNode.appendChild(cardDomElement)
-      computerPlays();
-    }
+      // If computer
+      if (target === 'computer') {
+        let cardDomElement = document.createElement('img');
+        cardApp.computerCards.push(response.cards[0])
+        cardDomElement.src = response.cards[0].image;
+        computerCardsNode.appendChild(cardDomElement)
+        computerPlays();
+      }
 
-  })
-  .catch(console.log)
+    })
+    .catch(console.log)
 }
-
