@@ -28,12 +28,14 @@ cardApp.newDeckNode = document.getElementById('new-game');
 cardApp.nextHandNode = document.getElementById('next-hand');
 cardApp.hitMeNode = document.getElementById('hit');
 cardApp.stayNode = document.getElementById('stay');
+cardApp.gameOverRestart = document.getElementsByClassName('overlay-text');
 
 // On click events
 cardApp.newDeckNode.onclick = getNewDeck;
 cardApp.nextHandNode.onclick = newHand;
 cardApp.hitMeNode.onclick = () => hitMe('player') || cardApp.hitSound.play();
 cardApp.stayNode.onclick = () => setTimeout(() => computerPlays(), 500);
+cardApp.gameOverRestart.onclick = resetGameArea;
 
 // Audio
 cardApp.hitSound = new Audio('../assets/audio/hit.wav');
@@ -268,16 +270,13 @@ function incrementComputerGamesWon() {
  function gameOver(){
   if (cardApp.computerScore === 2) {
     cardApp.gameOver = true;
-    cardApp.gameOverSound.play();
+    // cardApp.gameOverSound.play();
     document.getElementById('game-over-text').classList.add('visible');
 
   } else if (cardApp.playerScore === 2) {
     cardApp.gameOver = true;
-    cardApp.gameOverSound.play();
+    // cardApp.gameOverSound.play();
     document.getElementById('win-text').classList.add('visible');
   }
 }
-function gameOver() {
-  cardApp.gameOverSound.play();
-  document.getElementById('game-over-text').classList.add('visible');
-}
+
