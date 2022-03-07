@@ -32,8 +32,8 @@ cardApp.stayNode = document.getElementById('stay');
 // On click events
 cardApp.newDeckNode.onclick = getNewDeck;
 cardApp.nextHandNode.onclick = newHand;
-cardApp.hitMeNode.onclick = () => hitMe('player');
-cardApp.stayNode.onclick = () => setTimeout(() => computerPlays(), 700);
+cardApp.hitMeNode.onclick = () => hitMe('player') || cardApp.hitSound.play();
+cardApp.stayNode.onclick = () => setTimeout(() => computerPlays(), 500);
 
 // Audio
 cardApp.hitSound = new Audio('../assets/audio/hit.wav');
@@ -73,7 +73,7 @@ function getNewDeck() {
  * Clears the card area
  */
 function resetGameArea() {
-  cardApp.dealerCards = [];
+  cardApp.computerCards = [];
   cardApp.playerCards = [];
   cardApp.roundLost = false;
   cardApp.roundWon = false;
@@ -83,8 +83,8 @@ function resetGameArea() {
   cardApp.playerScore = 0;
   cardApp.playerGamesWon = 0;
   cardApp.computerGamesWon = 0;
-  cardApp.playerGamesWonNode.textContent = cardApp.playerGamesWon;
-  cardApp.computerScoreNode.textContent = cardApp.computerScore;
+  // cardApp.playerGamesWonNode.textContent = cardApp.playerGamesWon;
+  // cardApp.computerScoreNode.textContent = cardApp.computerScore;
   cardApp.messageNode.textContent = '';
   while (cardApp.computerCardsNode.firstChild) {
     cardApp.computerCardsNode.removeChild(cardApp.computerCardsNode.firstChild);
@@ -92,27 +92,6 @@ function resetGameArea() {
   while (cardApp.playerCardsNode.firstChild) {
     cardApp.playerCardsNode.removeChild(cardApp.playerCardsNode.firstChild);
   }
-}
-
-/**
- * This function is to calculate the card score and return the score
- */
-function calculateScore() {
-  let hasAce = false;
-  score = cardApp.cards.reduce((acc, card) => {
-    if (card.value === "ACE") {
-      hasAce = true;
-      return acc + 1
-    }
-    if (isNaN(card.value)) {
-      return acc + 10
-    }
-    return acc + Number(card.value);
-  }, 0)
-  if (hasAce) {
-    score = (score + 10) > 21 ? score : score + 10;
-  }
-  return score
 }
 
 
@@ -188,7 +167,6 @@ function hitMe(target) {
 
         cardApp.playerScoreNode.textContent = cardApp.playerScore;
 
-        cardApp.hitSound.play();
 
         if (cardApp.playerScore > 21) {
           cardApp.roundLost = true;
@@ -246,6 +224,27 @@ function computerPlays() {
 }
 
 /**
+ * This function is to calculate the card score and return the score
+ */
+ function calculateScore() {
+  let hasAce = false;
+  score = cards.reduce((acc, card) => {
+    if (card.value === "ACE") {
+      hasAce = true;
+      return acc + 1
+    }
+    if (isNaN(card.value)) {
+      return acc + 10
+    }
+    return acc + Number(card.value);
+  }, 0)
+  if (hasAce) {
+    score = (score + 10) > 21 ? score : score + 10;
+  }
+  return score
+}
+
+/**
  * Gets the current tally of player scores from the DOM and increments it by 1
  */
 function incrementPlayerGamesWon() {
@@ -266,6 +265,18 @@ function incrementComputerGamesWon() {
 /**
  * This function is called when the game is over, player has lost 5 games
  */
+ function gameOver(){
+  if (cardApp.computerScore === 2) {
+    cardApp.gameOver = true;
+    cardApp.gameOverSound.play();
+    document.getElementById('game-over-text').classList.add('visible');
+
+  } else if (cardApp.playerScore === 2) {
+    cardApp.gameOver = true;
+    cardApp.gameOverSound.play();
+    document.getElementById('win-text').classList.add('visible');
+  }
+}
 function gameOver() {
   cardApp.gameOverSound.play();
   document.getElementById('game-over-text').classList.add('visible');

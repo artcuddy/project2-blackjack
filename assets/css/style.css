@@ -244,6 +244,14 @@ footer p:hover {
     height: auto;
   }
 
+  #player-cards {
+    height: 120px;
+  }
+
+  #computer-cards {
+    height: 120px;
+  }
+
   .left-box {
     width: 100%;
     display: flex;
