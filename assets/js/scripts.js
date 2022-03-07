@@ -15,6 +15,8 @@ cardApp.computerScore = 0;
 // score nodes
 cardApp.computerScoreNode = document.getElementById('computer-score');
 cardApp.playerScoreNode = document.getElementById('player-score');
+cardApp.playerGamesWonNode = document.getElementById('player-games-won');
+cardApp.computerGamesWonNode = document.getElementById('computer-games-won');
 
 // card area nodes
 cardApp.computerCardsNode = document.getElementById('computer-cards');
@@ -79,6 +81,9 @@ function resetGameArea() {
   cardApp.gameOver = false;
   cardApp.computerScore = '';
   cardApp.playerScore = 0;
+  cardApp.playerGamesWon = 0;
+  cardApp.computerGamesWon = 0;
+  cardApp.playerGamesWonNode.textContent = cardApp.playerGamesWon;
   cardApp.computerScoreNode.textContent = cardApp.computerScore;
   cardApp.messageNode.textContent = '';
   while (cardApp.computerCardsNode.firstChild) {
