@@ -33,6 +33,28 @@ cardApp.nextHandNode.onclick = newHand;
 cardApp.hitMeNode.onclick = () => hitMe('player');
 cardApp.stayNode.onclick = () => setTimeout(() => computerPlays(), 700);
 
+// Audio controller
+class AudioController {
+  constructor() {
+      this.flipSound = new Audio('Assets/Audio/flip.wav');
+      this.matchSound = new Audio('Assets/Audio/match.wav');
+      this.winSound = new Audio('Assets/Audio/victory.wav');
+      this.gameOverSound = new Audio('Assets/Audio/gameOver.wav');
+  }
+  flip() {
+      this.flipSound.play();
+  }
+  match() {
+      this.matchSound.play();
+  }
+  victory() {
+      this.winSound.play();
+  }
+  gameOver() {
+      this.gameOverSound.play();
+  }
+}
+
 /**
  * Check if the DOM content has loaded and then run getNewDeck
  */
@@ -172,5 +194,6 @@ function calculateScore() {
 }
 
 function gameOver() {
-
+  this.audioController.gameOver();
+  document.getElementById('game-over-text').classList.add('visible');
 }
