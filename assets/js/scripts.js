@@ -33,27 +33,26 @@ cardApp.nextHandNode.onclick = newHand;
 cardApp.hitMeNode.onclick = () => hitMe('player');
 cardApp.stayNode.onclick = () => setTimeout(() => computerPlays(), 700);
 
-// Audio controller
-class AudioController {
+// Audio
+cardApp.hitSound = new Audio('../assets/audio/hit.wav');
+cardApp.newHandSound = new Audio('../assets/audio/newhand.wav');
+cardApp.winSound = new Audio('../assets/audio/win.wav');
+cardApp.gameOverSound = new Audio('../assets/audio/gameover.wav');
+
+
+class blackJack {
   constructor() {
-      this.flipSound = new Audio('../assets/audio/flip.wav');
-      this.matchSound = new Audio('../assets/audio/match.wav');
-      this.winSound = new Audio('../assets/audio/win.wav');
-      this.gameOverSound = new Audio('../assets/audio/gameOver.wav');
+      this.audioController = new AudioController();
   }
-  flip() {
-      this.flipSound.play();
-  }
-  match() {
-      this.matchSound.play();
-  }
-  victory() {
-      this.winSound.play();
-  }
-  gameOver() {
-      this.gameOverSound.play();
-  }
+gameOver() {
+  this.audioController.gameOver();
+  document.getElementById('game-over-text').classList.add('visible');
 }
+hit() {
+  this.audioController.hit();
+}
+}
+
 
 /**
  * Check if the DOM content has loaded and then run getNewDeck
@@ -170,10 +169,14 @@ function hitMe(target) {
         cardApp.playerScore = calculateScore(cardApp.playerCards);
 
         cardApp.playerScoreNode.textContent = cardApp.playerScore;
+
+        cardApp.hitSound.play();
+
         if (cardApp.playerScore > 21) {
           cardApp.roundLost = true;
           cardApp.message.Node.textContent = 'You Bust!'
         }
+
       }
 
       // If computer
@@ -194,6 +197,6 @@ function calculateScore() {
 }
 
 function gameOver() {
-  this.audioController.gameOver();
+  cardApp.gameOverSound.play();
   document.getElementById('game-over-text').classList.add('visible');
 }
