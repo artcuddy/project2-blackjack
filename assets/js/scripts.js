@@ -3,13 +3,13 @@ var cardApp = {};
 
 // game variables 
 cardApp.deckID = "";
-cardApp.dealerCards = [];
+cardApp.computerCards = [];
 cardApp.playerCards = [];
 cardApp.roundLost = false;
 cardApp.roundWon = false;
 cardApp.roundTied = false;
 cardApp.playerScore = 0;
-cardApp.dealerScore = 0;
+cardApp.computerScore = 0;
 
 // score nodes
 cardApp.computerScoreNode = document.getElementById('computer-score');
@@ -25,3 +25,82 @@ cardApp.newDeckNode = document.getElementById('new-game');
 cardApp.nextHandNode = document.getElementById('next-hand');
 cardApp.hitMeNode = document.getElementById('hit');
 cardApp.stayNode = document.getElementById('stay');
+
+// On click events
+cardApp.newDeckNode.onclick = getNewDeck;
+cardApp.nextHandNode.onclick = newHand;
+cardApp.hitMeNode.onclick = ()=>hitMe('player');
+// cardApp.stayNode.onclick = ()=>setTimeout(()=>computerPlays(), 600);
+
+function resetGameArea() {
+  cardApp.dealerCards = [];
+  cardApp.playerCards = [];
+  cardApp.roundLost = false;
+  cardApp.roundWon = false;
+  cardApp.roundTied = false;
+  cardApp.computerScore = "";
+  cardApp.playerScore = 0;
+  cardApp.computerScoreNode.textContent = cardApp.computerScore;
+  cardApp.messageNode.textContent = "";
+  while (cardApp.computerCardsNode.firstChild) {
+    cardApp.computerCardsNode.removeChild(cardApp.computerCardsNode.firstChild);
+  }
+  while (cardApp.playerCardsNode.firstChild) {
+    cardApp.playerCardsNode.removeChild(cardApp.playerCardsNode.firstChild);
+  }
+}
+
+function getNewDeck() {
+  resetGameArea();
+  fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=6')
+  .then(response => response.json())
+  .then(response => {
+    cardApp.deckID = response.deck_id;
+    cardApp.nextHandNode.style.display = 'block';
+    cardApp.hitMeNode.style.display = 'none';
+    cardApp.stayNode.style.display = 'none';
+  })
+  .catch(console.error)
+}
+
+function newHand() {
+  resetGameArea();
+  fetch(`https://deckofcardsapi.com/api/deck/${cardApp.deckID}/draw/?count=4`)
+  .then(response => response.json())
+  .then(response => {
+    cardApp.hitMeNode.style.display = "block";
+    cardApp.stayNode.style.display = "block";
+
+    cardApp.computerCards.push(response.cards[0], response.cards[1])
+    cardApp.playerCards.push(response.cards[2], response.cards[3])
+
+    cardApp.computerScore = "?";
+    cardApp.computerScoreNode.textContent = cardApp.computerScore;
+
+    cardApp.computerCards.forEach((card, i) => {
+      let cardDomElement = document.createElement("img");
+      if(i===0) {
+        cardDomElement.src = '../assets/images/card.png';
+      } else {
+        cardDomElement.src = card.image;
+      }
+      cardApp.computerCardsNode.appendChild(cardDomElement)
+    })
+
+    cardApp.playerCards.forEach(card => {
+      let cardDomElement = document.createElement("img");
+      cardDomElement.src = card.image;
+      cardApp.playerCardsNode.appendChild(cardDomElement)
+    })
+
+    cardApp.playerScore = computeScore(cardApp.playerCards);
+    if (cardApp.playerScore === 21) {
+      roundWon = true;
+      cardApp.messageNode.textContent = "BlackJack! You Win!";
+    }
+    cardApp.playerScoreNode.textContent = cardApp.playerScore;
+
+  })
+  .catch(console.error)
+}
+
