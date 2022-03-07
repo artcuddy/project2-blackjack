@@ -34,7 +34,32 @@ cardApp.hitMeNode.onclick = () => hitMe('player');
 cardApp.stayNode.onclick = () => setTimeout(() => computerPlays(), 700);
 
 /**
- * This function resets the ga,e area by setting all game variables to default settings
+ * Check if the DOM content has loaded and then run getNewDeck
+ */
+if (document.readyState == 'loading') {
+  document.addEventListener('DOMContentLoaded', getNewDeck);
+} else {
+  getNewDeck();
+}
+
+/**
+ * This function resets the game area and makes a call to the deckofcards API 
+ * Returns 6 shuffled decks to start the game with
+ */
+function getNewDeck() {
+  resetGameArea();
+  fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=6')
+    .then(response => response.json())
+    .then(response => {
+      cardApp.deckID = response.deck_id;
+      cardApp.nextHandNode.style.display = 'block';
+      cardApp.hitMeNode.style.display = 'none';
+      cardApp.stayNode.style.display = 'none';
+    })
+    .catch(console.error)
+}
+/**
+ * This function resets the game area by setting all game variables to default settings
  * Clears the card area
  */
 function resetGameArea() {
@@ -56,22 +81,6 @@ function resetGameArea() {
   }
 }
 
-/**
- * This function resets the game area and makes a call to the deckofcards API 
- * Returns 6 shuffled decks to start the game with
- */
-function getNewDeck() {
-  resetGameArea();
-  fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=6')
-    .then(response => response.json())
-    .then(response => {
-      cardApp.deckID = response.deck_id;
-      cardApp.nextHandNode.style.display = 'block';
-      cardApp.hitMeNode.style.display = 'none';
-      cardApp.stayNode.style.display = 'none';
-    })
-    .catch(console.error)
-}
 
 /**
  * This function resets the game area, makes an API call to the deckofcards API and returns 2 cards each
@@ -163,5 +172,5 @@ function calculateScore() {
 }
 
 function gameOver() {
-  
+
 }
