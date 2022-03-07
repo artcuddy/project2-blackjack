@@ -36,10 +36,10 @@ cardApp.stayNode.onclick = () => setTimeout(() => computerPlays(), 700);
 // Audio controller
 class AudioController {
   constructor() {
-      this.flipSound = new Audio('Assets/Audio/flip.wav');
-      this.matchSound = new Audio('Assets/Audio/match.wav');
-      this.winSound = new Audio('Assets/Audio/victory.wav');
-      this.gameOverSound = new Audio('Assets/Audio/gameOver.wav');
+      this.flipSound = new Audio('../assets/audio/flip.wav');
+      this.matchSound = new Audio('../assets/audio/match.wav');
+      this.winSound = new Audio('../assets/audio/win.wav');
+      this.gameOverSound = new Audio('../assets/audio/gameOver.wav');
   }
   flip() {
       this.flipSound.play();
