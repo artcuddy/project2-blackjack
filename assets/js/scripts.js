@@ -1,60 +1,45 @@
-let blackJackGame = {
-  'player': {
-    'playerScore': '#player-score',
-    'playerCards': '#player-cards',
-    'playerGamesWon': '#player-games-won',
-  },
-  'computer': {
-    'computerScore': '#computer-score',
-    'computerCards': '#computer-cards',
-    'computerGamesWon': '#computer-games-won',
-  },
-  'wins': 0,
-  'losses': 0,
-  'isStand': false,
-  'isEndOfTurn': false,
-  'pressOnce': false,
-}
+// to avoid global variable drama
+var cardApp = {};
 
 //deckofcards API DECKID
-const DECKID = '';
+cardApp.deckID = '';
 
 //players 
-const PLAYER = blackJackGame['player'];
-const COMPUTER = blackJackGame['computer'];
+cardApp.player = 'player';
+cardApp.computer = 'computer';
 
 //card area selectors
-// const COMPUTERCARDS = document.getElementById('computer-cards');
-// const PLAYERCARDS = document.getElementById('player-cards');
+cardApp.computerCards = document.getElementById('computer-cards');
+cardApp.playerCards = document.getElementById('player-cards');
 
 //scores selectors
-// const COMPUTERSCORE = document.getElementById('computer-score');
-// const PLAYERSCORE = document.getElementById('player-score');
+cardApp.computerScore = document.getElementById('computer-score');
+cardApp.playerScore = document.getElementById('player-score');
 
 //message area selectors
-const MESSAGE = document.getElementById('message');
+cardApp.message = document.getElementById('message');
 
 //audio
-const HITSOUND = new Audio('audio/swish.mp3');
-const WINSOUND = new Audio('audio/cash.mp3');
-const LOSESOUND = new Audio('audio/aww.mp3');
+cardApp.hitSound = new Audio('audio/swish.mp3');
+cardApp.winSound = new Audio('audio/cash.mp3');
+cardApp.lostSound = new Audio('audio/aww.mp3');
 
 //button event listeners
-document.getElementById('hit').addEventListener('click', hitMe);
-document.getElementById('new-game').addEventListener('click', getNewGame);
+// document.getElementById('hit').addEventListener('click', hitMe);
+// document.getElementById('new-game').addEventListener('click', getNewGame);
 
 
 //button click selectors
-// const HIT = document.getElementById('hit');
-// const STAY = document.getElementById('stay');
-// const NEWGAME = document.getElementById('new-game');
-// const NEWCARDS = document.getElementById('new-hand');
+cardApp.hit = document.getElementById('hit');
+cardApp.stay = document.getElementById('stay');
+cardApp.newGame = document.getElementById('new-game');
+cardApp.newHand = document.getElementById('new-hand');
 
 // //on click events
-// NEWGAME.onclick = getNewGame;
-// NEWCARDS.onclick - getNewCards;
-// HIT.onclick = ()=>hitMe('player');
-// STAY.onclick = ()=>setTimeout(()=>computerPlays(), 700);
+cardApp.newGame.onclick = getNewGame;
+cardApp.newHand.onclick - getNewCards;
+cardApp.hit.onclick = ()=>hitMe('player');
+cardApp.stay = ()=>setTimeout(()=>computerPlays(), 700);
 
 /**
  * This function should setup a new game, call the API for a new deck and clear the old game 
@@ -65,7 +50,7 @@ function getNewGame() {
   fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=6')
     .then(response => response.json())
     .then(response => {
-      DECKID.response = response.deck_id;
+      cardApp.deckID = response.deck_id;
 
 
     })
@@ -90,57 +75,55 @@ function getNewCards() {
 /**
  * This function should get a new card from the API when the hit button is clicked 
  */
-function hitMe() {
-  if (blackJackGame['isStand'] === false) {
-    fetch(`https://deckofcardsapi.com/api/deck/${DECKID}/draw/?count=1`)
+function hitMe(target) {
+    fetch(`https://deckofcardsapi.com/api/deck/${cardApp.deckID}/draw/?count=1`)
       .then(response => response.json())
       .then(response => {
         // If player
-        if (PLAYER === 'player') {
-          document.getElementById('player-cards').push(response.cards[0])
+        if (target === 'player') {
+          cardApp.playerCards.push(response.cards[0])
           let cardDomElement = document.createElement("img");
           cardDomElement.src = response.cards[0].image;
-          document.getElementById('player-cards').appendChild(cardDomElement)
+          cardApp.playerCards.appendChild(cardDomElement)
 
           // playerScore = computeScore(playerCards);
 
-         document.getElementById('player-score').textContent = playerScore;
+        cardApp.playerScore.textContent = playerScore;
           if (playerScore > 21) {
             roundLost = true;
-            document.getElementById('message').textContent = "You broke. You Lose Your Soul!";
+            cardApp.message.textContent = "You broke. You Lose Your Soul!";
           }
 
         }
 
         // If dealer
-        if (COMPUTER === 'dealer') {
+        if (target === 'computer') {
           let cardDomElement = document.createElement("img");
-          document.getElementById('computer-cards').push(res.cards[0])
+          cardApp.computerCards.push(res.cards[0])
           cardDomElement.src = response.cards[0].image;
-          document.getElementById('computer-cards').appendChild(cardDomElement);
+          cardApp.computerCards.appendChild(cardDomElement);
           // dealerPlays();
         }
 
-      })
-  }
+      })  
 }
 
 /**
  * This function should clear the old game and reset all variables to the default settings
  */
 function resetCardGame() {
-  document.getElementById('computer-cards').textContent = [];
-document.getElementById('player-cards').textContent = [];
+  cardApp.computerCards.textContent = [];
+cardApp.playerCards.textContent = [];
 
-  document.getElementById('computer-score').textContent = 0;
-  document.getElementById('player-score').textContent = 0;
+  cardApp.computerScore.textContent = 0;
+  cardApp.playerScore.textContent = 0;
 
-    document.getElementById('message').textContent = "";
-  while (document.getElementById('computer-cards').firstChild) {
-    document.getElementById('computer-cards').removeChild(document.getElementById('computer-cards').firstChild);
+    cardApp.message.textContent = "";
+  while (cardApp.computerCards.firstChild) {
+    cardApp.computerCards.removeChild(cardApp.computerCards.firstChild);
   }
-  while (document.getElementById('player-cards').firstChild) {
-    document.getElementById('player-cards').removeChild(document.getElementById('player-cards').firstChild);
+  while (cardApp.playerCards.firstChild) {
+    cardApp.playerCards.removeChild(cardApp.playerCards.firstChild);
   }
 
 }
