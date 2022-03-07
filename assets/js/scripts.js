@@ -1,8 +1,18 @@
 // to avoid global variable drama
 var cardApp = {};
 
-//deckofcards API DECKID
+// deckofcards API deckID
 cardApp.deckID = '';
+
+// initial game state
+
+cardApp.computerCards = [];
+cardApp.playerCards = [];
+cardApp.roundLost = false;
+cardApp.roundWon = false;
+cardApp.roundTied = false;
+cardApp.playerScore = 0;
+cardApp.dealerScore = 0;
 
 //players 
 cardApp.player = 'player';
@@ -20,9 +30,9 @@ cardApp.playerScore = document.getElementById('player-score');
 cardApp.message = document.getElementById('message');
 
 //audio
-cardApp.hitSound = new Audio('audio/swish.mp3');
-cardApp.winSound = new Audio('audio/cash.mp3');
-cardApp.lostSound = new Audio('audio/aww.mp3');
+// cardApp.hitSound = new Audio('audio/swish.mp3');
+// cardApp.winSound = new Audio('audio/cash.mp3');
+// cardApp.lostSound = new Audio('audio/aww.mp3');
 
 //button event listeners
 // document.getElementById('hit').addEventListener('click', hitMe);
@@ -38,8 +48,8 @@ cardApp.newHand = document.getElementById('new-hand');
 // //on click events
 cardApp.newGame.onclick = getNewGame;
 cardApp.newHand.onclick - getNewCards;
-cardApp.hit.onclick = ()=>hitMe('player');
-cardApp.stay = ()=>setTimeout(()=>computerPlays(), 700);
+cardApp.hit.onclick = () => hitMe('player');
+cardApp.stay = () => setTimeout(() => computerPlays(), 700);
 
 /**
  * This function should setup a new game, call the API for a new deck and clear the old game 
@@ -63,7 +73,7 @@ function getNewGame() {
  */
 function getNewCards() {
 
-  fetch(`https://deckofcardsapi.com/api/deck/${DECKID}/draw/?count=4`)
+  fetch(`https://deckofcardsapi.com/api/deck/${cardApp.deckID}/draw/?count=4`)
     .then(response => response.json())
     .then(response => {
 
@@ -76,49 +86,54 @@ function getNewCards() {
  * This function should get a new card from the API when the hit button is clicked 
  */
 function hitMe(target) {
-    fetch(`https://deckofcardsapi.com/api/deck/${cardApp.deckID}/draw/?count=1`)
-      .then(response => response.json())
-      .then(response => {
-        // If player
-        if (target === 'player') {
-          cardApp.playerCards.push(response.cards[0])
-          let cardDomElement = document.createElement("img");
-          cardDomElement.src = response.cards[0].image;
-          cardApp.playerCards.appendChild(cardDomElement)
+  fetch(`https://deckofcardsapi.com/api/deck/${cardApp.deckID}/draw/?count=1`)
+    .then(response => response.json())
+    .then(response => {
+      // If player
+      if (target === 'player') {
+        cardApp.playerCards.push(response.cards[0])
+        let cardDomElement = document.createElement("img");
+        cardDomElement.src = response.cards[0].image;
+        cardApp.playerCards.appendChild(cardDomElement)
 
-          // playerScore = computeScore(playerCards);
+        // playerScore = computeScore(playerCards);
 
         cardApp.playerScore.textContent = playerScore;
-          if (playerScore > 21) {
-            roundLost = true;
-            cardApp.message.textContent = "You broke. You Lose Your Soul!";
-          }
-
+        if (playerScore > 21) {
+          roundLost = true;
+          cardApp.message.textContent = "You broke. You Lose Your Soul!";
         }
 
-        // If dealer
-        if (target === 'computer') {
-          let cardDomElement = document.createElement("img");
-          cardApp.computerCards.push(res.cards[0])
-          cardDomElement.src = response.cards[0].image;
-          cardApp.computerCards.appendChild(cardDomElement);
-          // dealerPlays();
-        }
+      }
 
-      })  
+      // If dealer
+      if (target === 'computer') {
+        let cardDomElement = document.createElement("img");
+        cardApp.computerCards.push(res.cards[0])
+        cardDomElement.src = response.cards[0].image;
+        cardApp.computerCards.appendChild(cardDomElement);
+        // dealerPlays();
+      }
+
+    })
 }
 
 /**
  * This function should clear the old game and reset all variables to the default settings
  */
 function resetCardGame() {
-  cardApp.computerCards.textContent = [];
-cardApp.playerCards.textContent = [];
+  cardApp.computerCards = [];
+  cardApp.playerCards = [];
+  cardApp.roundLost = false;
+  cardApp.roundWon = false;
+  cardApp.roundTied = false;
 
-  cardApp.computerScore.textContent = 0;
-  cardApp.playerScore.textContent = 0;
+  cardApp.computerScore = '';
+  cardApp.playerScore = 0;
+  cardApp.computerScore.textContent = cardApp.computerScore;
 
-    cardApp.message.textContent = "";
+  cardApp.message.textContent = "";
+
   while (cardApp.computerCards.firstChild) {
     cardApp.computerCards.removeChild(cardApp.computerCards.firstChild);
   }
