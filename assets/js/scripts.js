@@ -106,7 +106,7 @@ function newHand() {
         cardApp.playerCardsNode.appendChild(cardDomElement)
       })
 
-      cardApp.playerScore = computeScore(cardApp.playerCards);
+      cardApp.playerScore = calculateScore(cardApp.playerCards);
       if (cardApp.playerScore === 21) {
         cardApp.roundWon = true;
         cardApp.messageNode.textContent = 'BlackJack! You Win!';
@@ -136,7 +136,7 @@ function hitMe(target) {
         cardDomElement.src = response.cards[0].image;
         cardApp.playerCardsNode.appendChild(cardDomElement)
 
-        cardApp.playerScore = computeScore(cardApp.playerCards);
+        cardApp.playerScore = calculateScore(cardApp.playerCards);
 
         cardApp.playerScoreNode.textContent = cardApp.playerScore;
         if (cardApp.playerScore > 21) {
@@ -158,6 +158,10 @@ function hitMe(target) {
     .catch(console.log)
 }
 
-function computeScore() {
+function calculateScore() {
 
+}
+
+function gameOver() {
+  
 }
