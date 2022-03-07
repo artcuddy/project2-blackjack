@@ -157,3 +157,7 @@ function hitMe(target) {
     })
     .catch(console.log)
 }
+
+function computeScore() {
+
+}
