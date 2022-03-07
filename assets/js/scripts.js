@@ -65,6 +65,7 @@ function getNewDeck() {
     })
     .catch(console.error)
 }
+
 /**
  * This function resets the game area by setting all game variables to default settings
  * Clears the card area
@@ -88,9 +89,8 @@ function resetGameArea() {
   }
 }
 
-
 /**
- * This function resets the game area, makes an API call to the deckofcards API and returns 2 cards each
+ * This function resets the game area, makes an API call to the deckofcards API and returns 2 cards for the player and 2 for the computer
  */
 function newHand() {
   resetGameArea();
@@ -130,6 +130,7 @@ function newHand() {
         cardApp.roundWon = true;
         cardApp.messageNode.textContent = 'BlackJack! You Win!';
         cardApp.winSound.play();
+        incrementplayerGamesWon();
       }
       cardApp.playerScoreNode.textContent = cardApp.playerScore;
 
@@ -164,8 +165,9 @@ function hitMe(target) {
 
         if (cardApp.playerScore > 21) {
           cardApp.roundLost = true;
-          cardApp.message.Node.textContent = 'You Bust!'
+          cardApp.messageNode.textContent = 'You Bust!'
           cardApp.gameOverSound.play();
+          incrementComputerGamesWon();
         }
 
       }
@@ -183,10 +185,49 @@ function hitMe(target) {
     .catch(console.log)
 }
 
+/**
+ * This function is to calculate the card score and return the score
+ */
 function calculateScore() {
-
+  let hasAce = false;
+  score = cards.reduce((acc, card) => {
+    if (card.value === "ACE") {
+      hasAce = true;
+      return acc + 1
+    }
+    if (isNaN(card.value)) {
+      return acc + 10
+    }
+    return acc + Number(card.value);
+  }, 0)
+  if (hasAce) {
+    score = (score + 10) > 21 ? score : score + 10;
+  }
+  return score
 }
 
+
+/**
+ * Gets the current tally of player scores from the DOM and increments it by 1
+ */
+function incrementPlayerGamesWon() {
+
+  let oldPlayerScore = parseInt(document.getElementById('player-games-won').innerText);
+  playerGamesWonNode.innerText = ++oldPlayerScore;
+}
+
+/**
+ * Gets the current tally of computer scores from the DOM and increments it by 1
+ */
+function incrementComputerGamesWon() {
+
+  let oldComputerScore = parseInt(document.getElementById('computer-games-won').innerText);
+  computerGamesWonNode.innerText = ++oldComputerScore;
+}
+
+/**
+ * This function is called when the game is over, player has lost 5 games
+ */
 function gameOver() {
   cardApp.gameOverSound.play();
   document.getElementById('game-over-text').classList.add('visible');
