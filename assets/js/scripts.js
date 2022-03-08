@@ -101,16 +101,20 @@ function resetGameArea() {
   while (cardApp.playerCardsNode.firstChild) {
     cardApp.playerCardsNode.removeChild(cardApp.playerCardsNode.firstChild);
   }
+  // Listens for click on the Game Over screen and resets the game
   let overlays = Array.from(document.getElementsByClassName('overlay-text'));
   overlays.forEach(overlay => {
     overlay.addEventListener('click', () => {
-        overlay.classList.remove('visible');
-        cardApp.newGameSound.play();
+      overlay.classList.remove('visible');
+      cardApp.newGameSound.play();
     });
-});
+  });
 }
 
-
+/**
+ * This function resets the game area by setting all game variables to default settings
+ * Clears the card area but not the games won counters
+ */
 function newHandReset() {
   cardApp.computerCards = [];
   cardApp.playerCards = [];
@@ -245,13 +249,13 @@ function computerPlays() {
     setTimeout(() => hitMe('computer'), 900)
   } else if (cardApp.computerScore > 21) {
     cardApp.roundWon = true;
-    cardApp.messageNode.textContent = 'Demon bust. You Won the hand!';
+    cardApp.messageNode.textContent = 'Demon bust!';
     cardApp.winSound.play();
     incrementPlayerGamesWon();
     gameOver();
   } else if (cardApp.computerScore > cardApp.playerScore) {
     cardApp.roundLost = true;
-    cardApp.messageNode.textContent = 'You Lost the hand';
+    cardApp.messageNode.textContent = 'You Lost!';
     cardApp.gameOverSound.play();
     incrementComputerGamesWon();
     gameOver();
@@ -262,7 +266,7 @@ function computerPlays() {
     gameOver();
   } else {
     cardApp.roundWon = true;
-    cardApp.messageNode.textContent = 'You Won the hand!';
+    cardApp.messageNode.textContent = 'You Won!';
     cardApp.winSound.play();
     incrementPlayerGamesWon();
     gameOver();
@@ -314,12 +318,12 @@ function incrementComputerGamesWon() {
  * player has lost 5 games or computer has lost 5 games
  */
 function gameOver() {
-  if (cardApp.computerGamesWonNode.innerText === '2') {
+  if (cardApp.computerGamesWonNode.innerText === '5') {
     cardApp.gameOver = true;
     cardApp.youLoseSound.play();
     document.getElementById('game-over-text').classList.add('visible');
     resetGameArea()
-  } else if (cardApp.playerGamesWonNode.innerText === '2') {
+  } else if (cardApp.playerGamesWonNode.innerText === '5') {
     cardApp.gameOver = true;
     cardApp.youWinSound.play();
     document.getElementById('win-text').classList.add('visible');
