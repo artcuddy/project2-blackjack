@@ -85,8 +85,10 @@ function resetGameArea() {
   cardApp.playerScore = 0;
   cardApp.playerGamesWon = 0;
   cardApp.computerGamesWon = 0;
-  // cardApp.playerGamesWonNode.textContent = cardApp.playerGamesWon;
-  // cardApp.computerScoreNode.textContent = cardApp.computerScore;
+  cardApp.playerGamesWonNode.textContent = cardApp.playerGamesWon;
+  cardApp.computerGamesWonNode.textContent = cardApp.computerGamesWon;
+  cardApp.computerScoreNode.textContent = cardApp.computerScore;
+  cardApp.playerScoreNode.textContent = cardApp.playerScore;
   cardApp.messageNode.textContent = '';
   while (cardApp.computerCardsNode.firstChild) {
     cardApp.computerCardsNode.removeChild(cardApp.computerCardsNode.firstChild);
@@ -97,11 +99,31 @@ function resetGameArea() {
 }
 
 
+function newHandReset() {
+  cardApp.computerCards = [];
+  cardApp.playerCards = [];
+  cardApp.roundLost = false;
+  cardApp.roundWon = false;
+  cardApp.roundTied = false;
+  cardApp.gameOver = false;
+  cardApp.computerScore = '';
+  cardApp.playerScore = 0;
+  cardApp.computerScoreNode.textContent = cardApp.computerScore;
+  cardApp.playerScoreNode.textContent = cardApp.playerScore;
+  cardApp.messageNode.textContent = '';
+  while (cardApp.computerCardsNode.firstChild) {
+    cardApp.computerCardsNode.removeChild(cardApp.computerCardsNode.firstChild);
+  }
+  while (cardApp.playerCardsNode.firstChild) {
+    cardApp.playerCardsNode.removeChild(cardApp.playerCardsNode.firstChild);
+  }
+}
+
 /**
  * This function resets the game area, makes an API call to the deckofcards API and returns 2 cards for the player and 2 for the computer
  */
 function newHand() {
-  resetGameArea();
+  newHandReset();
   fetch(`https://deckofcardsapi.com/api/deck/${cardApp.deckID}/draw/?count=4`)
     .then(response => response.json())
     .then(response => {
@@ -270,12 +292,12 @@ function incrementComputerGamesWon() {
  function gameOver(){
   if (cardApp.computerScore === 2) {
     cardApp.gameOver = true;
-    // cardApp.gameOverSound.play();
+    cardApp.gameOverSound.play();
     document.getElementById('game-over-text').classList.add('visible');
 
   } else if (cardApp.playerScore === 2) {
     cardApp.gameOver = true;
-    // cardApp.gameOverSound.play();
+    cardApp.gameOverSound.play();
     document.getElementById('win-text').classList.add('visible');
   }
 }
