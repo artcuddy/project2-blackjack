@@ -139,6 +139,7 @@ p {
 .card-game-area #message {
   font-family: 'Press Start 2P', 'sans-serif';
   font-size: 2.5rem;
+  color: rgb(238, 2, 2);
 }
 
 .message-area {
@@ -243,17 +244,17 @@ footer p:hover {
 
   .game-wrapper {
     width: 100%;
-    height: 65vh;
+    height: 40vh;
   }
 
   .card-game-area {
-    top: 30vh;
+    top: 20vh;
     width: 80%;
     height: auto;
   }
 
   .card-game-area #message {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   #player-cards {
@@ -267,16 +268,14 @@ footer p:hover {
   }
 
   .left-box {
-    width: 100%;
+    width: 50%;
     display: flex;
-    justify-content: space-between;
   }
 
   .right-box {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    margin-top: 2rem;
   }
 
   .right-box button {
@@ -288,14 +287,15 @@ footer p:hover {
   }
 
   .game-buttons {
-    display: block;
-    bottom: -35%;
+    display: flex;
+    bottom: -15%;
     right: 0;
   }
 
   .overlay-text.visible {
     display: flex;
     animation: overlay-grow 500ms forwards;
+    text-align: center;
   }
   
   @keyframes overlay-grow {
@@ -309,5 +309,15 @@ footer p:hover {
       font-size: 5em;
     }
   }
+
+}
+
+/* smaller screens @ max 500px media queries */
+
+@media screen and (max-width: 500px) {
+button {
+ font-size: 1.2rem;
+ padding: 1rem 1.5rem;
+}
 
 }
