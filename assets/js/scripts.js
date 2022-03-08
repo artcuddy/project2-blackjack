@@ -31,17 +31,22 @@ cardApp.stayNode = document.getElementById('stay');
 cardApp.gameOverRestart = document.getElementsByClassName('overlay-text');
 
 // On click events
-cardApp.newDeckNode.onclick = getNewDeck;
+cardApp.newDeckNode.onclick = getNewDeck || cardApp.newGameSound.play();
 cardApp.nextHandNode.onclick = newHand;
 cardApp.hitMeNode.onclick = () => hitMe('player') || cardApp.hitSound.play();
 cardApp.stayNode.onclick = () => setTimeout(() => computerPlays(), 500);
 cardApp.gameOverRestart.onclick = resetGameArea;
 
 // Audio
-cardApp.hitSound = new Audio('../assets/audio/hit.wav');
-cardApp.newHandSound = new Audio('../assets/audio/newhand.wav');
+cardApp.hitSound = new Audio('../assets/audio/hit.ogg');
+cardApp.newHandSound = new Audio('../assets/audio/newhand.ogg');
 cardApp.winSound = new Audio('../assets/audio/win.wav');
 cardApp.gameOverSound = new Audio('../assets/audio/gameover.wav');
+cardApp.newGameSound = new Audio('../assets/audio/new-game.ogg');
+cardApp.staySound = new Audio('../assets/audio/stay.wav');
+cardApp.tieSound = new Audio('../assets/audio/tie.ogg');
+cardApp.youLoseSound = new Audio('../assets/audio/you_lose.ogg');
+cardApp.youWinSound = new Audio('../assets/audio/you_win.ogg');
 
 
 /**
@@ -159,8 +164,8 @@ function newHand() {
       if (cardApp.playerScore === 21) {
         cardApp.roundWon = true;
         cardApp.messageNode.textContent = 'BlackJack! You Win!';
-        cardApp.winSound.play();
-        incrementplayerGamesWon();
+        cardApp.youWinSound.play();
+        incrementPlayerGamesWon();
       }
       cardApp.playerScoreNode.textContent = cardApp.playerScore;
 
@@ -195,7 +200,7 @@ function hitMe(target) {
         if (cardApp.playerScore > 21) {
           cardApp.roundLost = true;
           cardApp.messageNode.textContent = 'You Bust!'
-          cardApp.gameOverSound.play();
+          cardApp.youLoseSound.play();
           incrementComputerGamesWon();
         }
 
@@ -219,6 +224,7 @@ function computerPlays() {
   if (cardApp.roundLost || cardApp.roundWon || cardApp.roundTied) {
     return
   }
+  cardApp.hitSound.play();
   cardApp.computerScore = calculateScore(cardApp.computerCards);
   cardApp.computerScoreNode.textContent = cardApp.computerScore;
   cardApp.computerCardsNode.firstChild.src = cardApp.computerCards[0].image;
@@ -227,22 +233,23 @@ function computerPlays() {
     setTimeout(() => hitMe('computer'), 900)
   } else if (cardApp.computerScore > 21) {
     cardApp.roundWon = true;
-    cardApp.messageNode.textContent = 'House bust. You Won the hand!';
-    cardApp.gameOverSound.play();
+    cardApp.messageNode.textContent = 'Demon bust. You Won the hand!';
+    cardApp.youWinSound.play();
     incrementPlayerGamesWon();
   } else if (cardApp.computerScore > cardApp.playerScore) {
     cardApp.roundLost = true;
     cardApp.messageNode.textContent = 'You Lost the hand';
-    cardApp.gameOverSound.play();
+    cardApp.youLoseSound.play();
     incrementComputerGamesWon();
   } else if (cardApp.computerScore === cardApp.playerScore) {
     cardApp.roundTied = true;
-    cardApp.messageNode.textContent = "It's a Tie, you don't lose your soul yet";
+    cardApp.messageNode.textContent = "It's a Tie";
+    cardApp.tieSound.play();
   } else {
     cardApp.roundWon = true;
     cardApp.messageNode.textContent = 'You Won the hand!';
-    cardApp.winSound.play();
-    incrementComputerGamesWon();
+    cardApp.youWinSound.play();
+    incrementPlayerGamesWon();
   }
 
 }
@@ -250,7 +257,7 @@ function computerPlays() {
 /**
  * This function is to calculate the card score and return the score
  */
- function calculateScore(playerCards) {
+function calculateScore(playerCards) {
   let hasAce = false;
   score = playerCards.reduce((acc, card) => {
     if (card.value === "ACE") {
@@ -289,16 +296,15 @@ function incrementComputerGamesWon() {
 /**
  * This function is called when the game is over, player has lost 5 games
  */
- function gameOver(){
-  if (cardApp.computerScore === 2) {
-    cardApp.gameOver = true;
-    cardApp.gameOverSound.play();
-    document.getElementById('game-over-text').classList.add('visible');
+// function gameOver() {
+//   if (cardApp.computerScore === 2) {
+//     cardApp.gameOver = true;
+//     cardApp.gameOverSound.play();
+//     document.getElementById('game-over-text').classList.add('visible');
 
-  } else if (cardApp.playerScore === 2) {
-    cardApp.gameOver = true;
-    cardApp.gameOverSound.play();
-    document.getElementById('win-text').classList.add('visible');
-  }
-}
-
+//   } else if (cardApp.playerScore === 2) {
+//     cardApp.gameOver = true;
+//     cardApp.gameOverSound.play();
+//     document.getElementById('win-text').classList.add('visible');
+//   }
+// }
