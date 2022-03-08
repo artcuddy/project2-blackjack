@@ -41,7 +41,7 @@ h2 {
 
 h3 {
   font-family: 'Work Sans', 'sans-serif';
-  font-weight: 400;
+  font-weight: 600;
   font-size: 1.4rem;
   color: #1f1f1f;
   text-transform: uppercase;
@@ -55,6 +55,7 @@ p {
   font-size: 1.6rem;
   font-size: clamp(1.6rem, 1.5259259259259261rem + 0.37037037037037024vw, 2rem);
 }
+
 
 .overlay-text {
   top: 0;
@@ -130,24 +131,24 @@ p {
 #computer-cards {
   display: flex;
   justify-content: center;
-  height: 150px;
+  height: 130px;
 }
 
 .card-game-area #message {
-  font-family: "Butcherman";
-  font-size: 3rem;
+  font-family: 'Press Start 2P', 'sans-serif';
+  font-size: 2.5rem;
 }
 
 .message-area {
   width: 100%;
-  padding: 1rem;
+  padding-top: 1rem;
   text-align: center;
 }
 
 #player-cards {
   display: flex;
   justify-content: center;
-  height: 150px;
+  height: 130px;
 }
 
 .player-area h3 {
