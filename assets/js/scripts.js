@@ -278,16 +278,16 @@ function computerPlays() {
     //you lost roundlost play game over sound and update computer games won
     cardApp.roundLost = true;
     cardApp.messageNode.textContent = 'You Lost!';
-    cardApp.stayNode.style.display = 'none';
     cardApp.gameOverSound.play();
+    cardApp.stayNode.style.display = 'none';
     incrementComputerGamesWon();
     gameOver();
   } else if (cardApp.computerScore === cardApp.playerScore) {
     //you tied roundtied play tie sound and hide hit button
     cardApp.roundTied = true;
     cardApp.messageNode.textContent = "It's a Tie";
-    ardApp.hitMeNode.style.display = 'none';
     cardApp.tieSound.play();
+    ardApp.hitMeNode.style.display = 'none';
     gameOver();
   } else {
     //you won roundtied play win sound and update players games won
