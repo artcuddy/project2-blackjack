@@ -184,7 +184,7 @@ function hitMe(target) {
         let cardDomElement = document.createElement('img');
         cardApp.computerCards.push(response.cards[0])
         cardDomElement.src = response.cards[0].image;
-        computerCardsNode.appendChild(cardDomElement)
+        cardApp.computerCardsNode.appendChild(cardDomElement)
         computerPlays();
       }
 
@@ -220,7 +220,7 @@ function computerPlays() {
     cardApp.roundWon = true;
     cardApp.messageNode.textContent = 'You Won the hand!';
     cardApp.winSound.play();
-    incrementPlayerGamesWon();
+    incrementComputerGamesWon();
   }
 
 }
@@ -228,9 +228,9 @@ function computerPlays() {
 /**
  * This function is to calculate the card score and return the score
  */
- function calculateScore() {
+ function calculateScore(playerCards) {
   let hasAce = false;
-  score = cards.reduce((acc, card) => {
+  score = playerCards.reduce((acc, card) => {
     if (card.value === "ACE") {
       hasAce = true;
       return acc + 1
@@ -252,7 +252,7 @@ function computerPlays() {
 function incrementPlayerGamesWon() {
 
   let oldPlayerScore = parseInt(document.getElementById('player-games-won').innerText);
-  playerGamesWonNode.innerText = ++oldPlayerScore;
+  cardApp.playerGamesWonNode.innerText = ++oldPlayerScore;
 }
 
 /**
@@ -261,7 +261,7 @@ function incrementPlayerGamesWon() {
 function incrementComputerGamesWon() {
 
   let oldComputerScore = parseInt(document.getElementById('computer-games-won').innerText);
-  computerGamesWonNode.innerText = ++oldComputerScore;
+  cardApp.computerGamesWonNode.innerText = ++oldComputerScore;
 }
 
 /**
