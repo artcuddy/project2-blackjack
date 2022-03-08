@@ -22,7 +22,7 @@ cardApp.computerGamesWonNode = document.getElementById('computer-games-won');
 cardApp.computerCardsNode = document.getElementById('computer-cards');
 cardApp.playerCardsNode = document.getElementById('player-cards');
 
-// other nodes
+// other needed nodes
 cardApp.messageNode = document.getElementById('message');
 cardApp.newDeckNode = document.getElementById('new-game');
 cardApp.nextHandNode = document.getElementById('next-hand');
@@ -30,12 +30,29 @@ cardApp.hitMeNode = document.getElementById('hit');
 cardApp.stayNode = document.getElementById('stay');
 cardApp.gameOverRestart = document.getElementsByClassName('overlay-text');
 
-// On click events
-cardApp.newDeckNode.onclick = getNewDeck || cardApp.newGameSound.play();
-cardApp.nextHandNode.onclick = newHand;
-cardApp.hitMeNode.onclick = () => hitMe('player') || cardApp.hitSound.play();
-cardApp.stayNode.onclick = () => setTimeout(() => computerPlays(), 500);
+// Click event listeners
+cardApp.nextHandNode.addEventListener('click', newHand);
 cardApp.gameOverRestart.onclick = () => resetGameArea();
+//listens for click on new game button plays new game sound and calls getNewDeck function
+cardApp.newDeckNode.addEventListener('click', function () {
+  cardApp.newGameSound.play();
+  getNewDeck();
+});
+//listens for click on hit button plays hit sound and calls hitMe function
+cardApp.hitMeNode.addEventListener('click', function () {
+  cardApp.hitSound.play();
+  hitMe('player');
+
+});
+//listens for click on stay button plays stay sound sets a delay for the computer and hides hit button
+cardApp.stayNode.addEventListener('click', function () {
+  cardApp.staySound.play();
+  cardApp.hitMeNode.style.display = 'none';
+  setTimeout(function () {
+    computerPlays();
+  }, 600);
+});
+
 
 // Audio
 cardApp.hitSound = new Audio('../assets/audio/hit.ogg');
@@ -101,11 +118,12 @@ function resetGameArea() {
   while (cardApp.playerCardsNode.firstChild) {
     cardApp.playerCardsNode.removeChild(cardApp.playerCardsNode.firstChild);
   }
-  // Listens for click on the Game Over screen and resets the game
+  // Listens for click on the Game Over screen plays new game sound and resets the game
   let overlays = Array.from(document.getElementsByClassName('overlay-text'));
   overlays.forEach(overlay => {
     overlay.addEventListener('click', () => {
       overlay.classList.remove('visible');
+      resetGameArea()
       cardApp.newGameSound.play();
     });
   });
@@ -145,16 +163,16 @@ function newHand() {
     .then(response => {
 
       cardApp.newHandSound.play();
-
+      //display the hit and stay buttons
       cardApp.hitMeNode.style.display = 'block';
       cardApp.stayNode.style.display = 'block';
-
+      //output cards
       cardApp.computerCards.push(response.cards[0], response.cards[1])
       cardApp.playerCards.push(response.cards[2], response.cards[3])
 
       cardApp.computerScore = '?';
       cardApp.computerScoreNode.textContent = cardApp.computerScore;
-
+      //show cards but hide the first computer card
       cardApp.computerCards.forEach((card, i) => {
         let cardDomElement = document.createElement('img');
         if (i === 0) {
@@ -170,13 +188,15 @@ function newHand() {
         cardDomElement.src = card.image;
         cardApp.playerCardsNode.appendChild(cardDomElement)
       })
-
+      // you got black jack you win and the hit and stay buttons are removed
       cardApp.playerScore = calculateScore(cardApp.playerCards);
       if (cardApp.playerScore === 21) {
         cardApp.roundWon = true;
         cardApp.messageNode.textContent = 'BlackJack! You Win!';
         cardApp.winSound.play();
         incrementPlayerGamesWon();
+        cardApp.hitMeNode.style.display = 'none';
+        cardApp.stayNode.style.display = 'none';
       }
       cardApp.playerScoreNode.textContent = cardApp.playerScore;
 
@@ -197,7 +217,7 @@ function hitMe(target) {
     .then(response => response.json())
     .then(response => {
 
-      // If player
+      // If player is playing
       if (target === 'player') {
         cardApp.playerCards.push(response.cards[0])
         let cardDomElement = document.createElement('img');
@@ -207,7 +227,7 @@ function hitMe(target) {
         cardApp.playerScore = calculateScore(cardApp.playerCards);
 
         cardApp.playerScoreNode.textContent = cardApp.playerScore;
-
+        //you bust roundlost play game over sound and update computer games won
         if (cardApp.playerScore > 21) {
           cardApp.roundLost = true;
           cardApp.messageNode.textContent = 'You Bust!'
@@ -218,7 +238,7 @@ function hitMe(target) {
 
       }
 
-      // If computer
+      // If computer is playing
       if (target === 'computer') {
         let cardDomElement = document.createElement('img');
         cardApp.computerCards.push(response.cards[0])
@@ -248,23 +268,29 @@ function computerPlays() {
   if (cardApp.computerScore < 17) {
     setTimeout(() => hitMe('computer'), 900)
   } else if (cardApp.computerScore > 21) {
+    //computer bust roundwon play win sound and update player games won
     cardApp.roundWon = true;
     cardApp.messageNode.textContent = 'Demon bust!';
     cardApp.winSound.play();
     incrementPlayerGamesWon();
     gameOver();
   } else if (cardApp.computerScore > cardApp.playerScore) {
+    //you lost roundlost play game over sound and update computer games won
     cardApp.roundLost = true;
     cardApp.messageNode.textContent = 'You Lost!';
+    cardApp.stayNode.style.display = 'none';
     cardApp.gameOverSound.play();
     incrementComputerGamesWon();
     gameOver();
   } else if (cardApp.computerScore === cardApp.playerScore) {
+    //you tied roundtied play tie sound and hide hit button
     cardApp.roundTied = true;
     cardApp.messageNode.textContent = "It's a Tie";
+    ardApp.hitMeNode.style.display = 'none';
     cardApp.tieSound.play();
     gameOver();
   } else {
+    //you won roundtied play win sound and update players games won
     cardApp.roundWon = true;
     cardApp.messageNode.textContent = 'You Won!';
     cardApp.winSound.play();
@@ -275,7 +301,7 @@ function computerPlays() {
 }
 
 /**
- * This function is to calculate the card score and return the score
+ * This function is to calculate the card score and return the score of the played cards
  */
 function calculateScore(playerCards) {
   let hasAce = false;
@@ -318,15 +344,15 @@ function incrementComputerGamesWon() {
  * player has lost 5 games or computer has lost 5 games
  */
 function gameOver() {
-  if (cardApp.computerGamesWonNode.innerText === '5') {
+  if (cardApp.computerGamesWonNode.innerText === '2') {
     cardApp.gameOver = true;
     cardApp.youLoseSound.play();
     document.getElementById('game-over-text').classList.add('visible');
-    resetGameArea()
-  } else if (cardApp.playerGamesWonNode.innerText === '5') {
+    newHandReset();
+  } else if (cardApp.playerGamesWonNode.innerText === '2') {
     cardApp.gameOver = true;
     cardApp.youWinSound.play();
     document.getElementById('win-text').classList.add('visible');
-    resetGameArea()
+    newHandReset();
   }
 }

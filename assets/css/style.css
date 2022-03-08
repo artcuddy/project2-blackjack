@@ -69,7 +69,7 @@ p {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  color: #FF6D00;
+  color: rgb(238, 2, 2);
   font-family: 'Press Start 2P', 'sans-serif';
   transition: background-color 500ms, font-size 500ms;
 }
@@ -291,6 +291,23 @@ footer p:hover {
     display: block;
     bottom: -35%;
     right: 0;
+  }
+
+  .overlay-text.visible {
+    display: flex;
+    animation: overlay-grow 500ms forwards;
+  }
+  
+  @keyframes overlay-grow {
+    from {
+      background-color: rgba(0, 0, 0, 0);
+      font-size: 0;
+    }
+  
+    to {
+      background-color: rgba(0, 0, 0, .8);
+      font-size: 5em;
+    }
   }
 
 }
