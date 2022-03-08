@@ -35,7 +35,7 @@ cardApp.newDeckNode.onclick = getNewDeck || cardApp.newGameSound.play();
 cardApp.nextHandNode.onclick = newHand;
 cardApp.hitMeNode.onclick = () => hitMe('player') || cardApp.hitSound.play();
 cardApp.stayNode.onclick = () => setTimeout(() => computerPlays(), 500);
-cardApp.gameOverRestart.onclick = resetGameArea;
+cardApp.gameOverRestart.onclick = () => resetGameArea();
 
 // Audio
 cardApp.hitSound = new Audio('../assets/audio/hit.ogg');
@@ -101,6 +101,13 @@ function resetGameArea() {
   while (cardApp.playerCardsNode.firstChild) {
     cardApp.playerCardsNode.removeChild(cardApp.playerCardsNode.firstChild);
   }
+  let overlays = Array.from(document.getElementsByClassName('overlay-text'));
+  overlays.forEach(overlay => {
+    overlay.addEventListener('click', () => {
+        overlay.classList.remove('visible');
+        cardApp.newGameSound.play();
+    });
+});
 }
 
 
@@ -164,7 +171,7 @@ function newHand() {
       if (cardApp.playerScore === 21) {
         cardApp.roundWon = true;
         cardApp.messageNode.textContent = 'BlackJack! You Win!';
-        cardApp.youWinSound.play();
+        cardApp.winSound.play();
         incrementPlayerGamesWon();
       }
       cardApp.playerScoreNode.textContent = cardApp.playerScore;
@@ -175,10 +182,11 @@ function newHand() {
 
 /**
  * This function adds a card to the players hand when the hit button is clicked
- * also checks if the round was won, lost or tied
+ * also checks if the round was won, lost, tied or game over 
  */
 function hitMe(target) {
-  if (cardApp.roundLost || cardApp.roundWon || cardApp.roundTied) {
+
+  if (cardApp.roundLost || cardApp.roundWon || cardApp.roundTied || cardApp.gameOver) {
     return
   }
   fetch(`https://deckofcardsapi.com/api/deck/${cardApp.deckID}/draw/?count=1`)
@@ -196,12 +204,12 @@ function hitMe(target) {
 
         cardApp.playerScoreNode.textContent = cardApp.playerScore;
 
-
         if (cardApp.playerScore > 21) {
           cardApp.roundLost = true;
           cardApp.messageNode.textContent = 'You Bust!'
-          cardApp.youLoseSound.play();
+          cardApp.gameOverSound.play();
           incrementComputerGamesWon();
+          gameOver();
         }
 
       }
@@ -213,43 +221,51 @@ function hitMe(target) {
         cardDomElement.src = response.cards[0].image;
         cardApp.computerCardsNode.appendChild(cardDomElement)
         computerPlays();
+        gameOver();
       }
 
     })
     .catch(console.log)
 }
 
+/**
+ * This function adds a card to the copmuters hand until one of the conditions is met
+ * also checks if the round was won, lost, tied or game over 
+ */
 function computerPlays() {
-
-  if (cardApp.roundLost || cardApp.roundWon || cardApp.roundTied) {
+  if (cardApp.roundLost || cardApp.roundWon || cardApp.roundTied || cardApp.gameOver) {
     return
   }
-  cardApp.hitSound.play();
   cardApp.computerScore = calculateScore(cardApp.computerCards);
   cardApp.computerScoreNode.textContent = cardApp.computerScore;
   cardApp.computerCardsNode.firstChild.src = cardApp.computerCards[0].image;
+  cardApp.hitSound.play();
 
   if (cardApp.computerScore < 17) {
     setTimeout(() => hitMe('computer'), 900)
   } else if (cardApp.computerScore > 21) {
     cardApp.roundWon = true;
     cardApp.messageNode.textContent = 'Demon bust. You Won the hand!';
-    cardApp.youWinSound.play();
+    cardApp.winSound.play();
     incrementPlayerGamesWon();
+    gameOver();
   } else if (cardApp.computerScore > cardApp.playerScore) {
     cardApp.roundLost = true;
     cardApp.messageNode.textContent = 'You Lost the hand';
-    cardApp.youLoseSound.play();
+    cardApp.gameOverSound.play();
     incrementComputerGamesWon();
+    gameOver();
   } else if (cardApp.computerScore === cardApp.playerScore) {
     cardApp.roundTied = true;
     cardApp.messageNode.textContent = "It's a Tie";
     cardApp.tieSound.play();
+    gameOver();
   } else {
     cardApp.roundWon = true;
     cardApp.messageNode.textContent = 'You Won the hand!';
-    cardApp.youWinSound.play();
+    cardApp.winSound.play();
     incrementPlayerGamesWon();
+    gameOver();
   }
 
 }
@@ -294,17 +310,19 @@ function incrementComputerGamesWon() {
 }
 
 /**
- * This function is called when the game is over, player has lost 5 games
+ * This function is called when the game is over, 
+ * player has lost 5 games or computer has lost 5 games
  */
-// function gameOver() {
-//   if (cardApp.computerScore === 2) {
-//     cardApp.gameOver = true;
-//     cardApp.gameOverSound.play();
-//     document.getElementById('game-over-text').classList.add('visible');
-
-//   } else if (cardApp.playerScore === 2) {
-//     cardApp.gameOver = true;
-//     cardApp.gameOverSound.play();
-//     document.getElementById('win-text').classList.add('visible');
-//   }
-// }
+function gameOver() {
+  if (cardApp.computerGamesWonNode.innerText === '2') {
+    cardApp.gameOver = true;
+    cardApp.youLoseSound.play();
+    document.getElementById('game-over-text').classList.add('visible');
+    resetGameArea()
+  } else if (cardApp.playerGamesWonNode.innerText === '2') {
+    cardApp.gameOver = true;
+    cardApp.youWinSound.play();
+    document.getElementById('win-text').classList.add('visible');
+    resetGameArea()
+  }
+}
