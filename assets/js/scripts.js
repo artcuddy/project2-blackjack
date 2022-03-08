@@ -287,7 +287,7 @@ function computerPlays() {
     cardApp.roundTied = true;
     cardApp.messageNode.textContent = "It's a Tie";
     cardApp.tieSound.play();
-    ardApp.hitMeNode.style.display = 'none';
+    cardApp.hitMeNode.style.display = 'none';
     gameOver();
   } else {
     //you won roundtied play win sound and update players games won
