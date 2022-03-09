@@ -293,6 +293,8 @@ function hitMe(target) {
         if (cardApp.playerScore > 21) {
           cardApp.roundLost = true;
           cardApp.messageNode.textContent = 'You Bust!';
+          cardApp.hitMeNode.style.display = 'none';
+          cardApp.stayNode.style.display = 'none';
           cardApp.gameOverSound.play();
           incrementComputerGamesWon();
           gameOver();
@@ -326,6 +328,7 @@ function computerPlays() {
   cardApp.computerScoreNode.textContent = cardApp.computerScore;
   cardApp.computerCardsNode.firstChild.src = cardApp.computerCards[0].image;
   cardApp.hitSound.play();
+  cardApp.stayNode.style.display = 'none';
 
   if (cardApp.computerScore < 17) {
     setTimeout(() => hitMe('computer'), 900);
@@ -334,6 +337,8 @@ function computerPlays() {
     cardApp.roundWon = true;
     cardApp.messageNode.textContent = 'Demon bust!';
     cardApp.winSound.play();
+    cardApp.hitMeNode.style.display = 'none';
+    cardApp.stayNode.style.display = 'none';
     incrementPlayerGamesWon();
     gameOver();
   } else if (cardApp.computerScore > cardApp.playerScore) {
@@ -341,21 +346,25 @@ function computerPlays() {
     cardApp.roundLost = true;
     cardApp.messageNode.textContent = 'You Lost!';
     cardApp.gameOverSound.play();
+    cardApp.hitMeNode.style.display = 'none';
     cardApp.stayNode.style.display = 'none';
     incrementComputerGamesWon();
     gameOver();
   } else if (cardApp.computerScore === cardApp.playerScore) {
-    //you tied roundtied play tie sound and hide hit button
+    //you tied the round play tie sound and hide hit button
     cardApp.roundTied = true;
     cardApp.messageNode.textContent = "It's a Tie";
     cardApp.tieSound.play();
+    cardApp.stayNode.style.display = 'none';
     cardApp.hitMeNode.style.display = 'none';
     gameOver();
   } else {
-    //you won roundtied play win sound and update players games won
+    //you won the round play win sound and update players games won
     cardApp.roundWon = true;
     cardApp.messageNode.textContent = 'You Won!';
     cardApp.winSound.play();
+    cardApp.hitMeNode.style.display = 'none';
+    cardApp.stayNode.style.display = 'none';
     incrementPlayerGamesWon();
     gameOver();
   }
@@ -406,12 +415,12 @@ function incrementComputerGamesWon() {
  * player has lost 5 games or computer has lost 5 games
  */
 function gameOver() {
-  if (cardApp.computerGamesWonNode.innerText === '5') {
+  if (cardApp.computerGamesWonNode.innerText === '2') {
     cardApp.gameOver = true;
     cardApp.youLoseSound.play();
     document.getElementById('game-over-text').classList.add('visible');
     newHandReset();
-  } else if (cardApp.playerGamesWonNode.innerText === '5') {
+  } else if (cardApp.playerGamesWonNode.innerText === '2') {
     cardApp.gameOver = true;
     cardApp.youWinSound.play();
     document.getElementById('win-text').classList.add('visible');

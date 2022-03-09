@@ -27,8 +27,8 @@ header {
 
 h1 {
   font-family: 'Press Start 2P', 'sans-serif';
-  font-size: 3rem;
-  font-size: clamp(3rem, 2.6296296296296298rem + 1.8518518518518516vw, 5rem);
+  font-size: 2rem;
+  font-size: clamp(2rem, 1.4444444444444444rem + 2.7777777777777777vw, 5rem);
   text-align: center;
   color: #fff;
 }
@@ -111,7 +111,7 @@ p {
   position: relative;
   z-index: 1;
   width: 850px;
-  height: 440px;
+  height: auto;
   margin-left: auto;
   margin-right: auto;
   padding: 0 2rem 2rem 2rem;
@@ -146,6 +146,7 @@ p {
   width: 100%;
   padding-top: 1rem;
   text-align: center;
+  height: 30px;
 }
 
 #player-cards {
@@ -282,7 +283,11 @@ footer p:hover {
   .card-game-area {
     top: 20vh;
     width: 80%;
-    height: 380px;
+    height: auto;
+  }
+
+  .message-area {
+    height: 15px;
   }
 
   .card-game-area #message {
