@@ -194,9 +194,6 @@ button {
   outline: none;
   border: none;
   transition: all 0.2s ease 0s;
-
-  /* -webkit-box-shadow: inset 0px 0px 5px 2px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: inset 0px 0px 5px 2px rgba(0, 0, 0, 0.75); */
   box-shadow: inset 0px 0px 5px 2px rgba(0, 0, 0, 0.75);
 }
 
@@ -207,13 +204,12 @@ button:hover {
 
 button:active {
   color: rgb(238, 2, 2);
-  /* -webkit-box-shadow: inset 0px 0px 14px 5px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: inset 0px 0px 14px 5px rgba(0, 0, 0, 0.75); */
   box-shadow: inset 0px 0px 14px 5px rgba(0, 0, 0, 0.75);
 }
 
 .admin-buttons {
   margin: 1em;
+  background-color: #00ffff;
 }
 
 /* New Game warning */
