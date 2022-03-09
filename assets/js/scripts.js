@@ -30,7 +30,7 @@ cardApp.hitMeNode = document.getElementById('hit');
 cardApp.stayNode = document.getElementById('stay');
 cardApp.gameOverRestart = document.getElementsByClassName('overlay-text');
 cardApp.instructionsNode = document.getElementById('instructions-button');
-cardApp.rulesNode = document.getElementById('rules-button');
+cardApp.cardValuesNode = document.getElementById('rules-button');
 
 // Click event listeners
 cardApp.nextHandNode.addEventListener('click', newHand);
@@ -50,7 +50,7 @@ cardApp.newGameNode.addEventListener('click', function () {
   }).then((result) => {
     if (result.isConfirmed) {
 
-        getNewGame()
+      getNewGame()
 
     }
   })
@@ -58,12 +58,11 @@ cardApp.newGameNode.addEventListener('click', function () {
 
 //listens for click on Instructions button and displays the info
 cardApp.instructionsNode.addEventListener('click', function () {
-  cardApp.staySound.play();
+  cardApp.newGameSound.play();
   Swal.fire({
     title: '<strong>How To Play</strong>',
     icon: 'info',
-    html:
-      "Hi Player,<br> Can you beat The Demon.<br>" +
+    html: "Hi Player,<br> Can you beat The Demon.<br>" +
       "<br>The goal of this game is to get as many points as possible but without going over 21 points, because then you will automatically lose the hand!<br>" +
       "<br>Press the 'NEW HAND' button to start a new round:<br>" +
       "<br>Then based on your cards score either click the 'HIT' button or 'STAY' button <br>" +
@@ -71,12 +70,31 @@ cardApp.instructionsNode.addEventListener('click', function () {
       "<br>The 'STAY' button stops play for you and lets the Demon play<br>" +
       "<br>Then it will be my turn to beat your score!<br>" +
       "<br>The first one to win 5 rounds will be the final winner.<br>",
-     
+
     showCloseButton: true,
     showCancelButton: false,
     focusConfirm: false,
-    confirmButtonText:
-      '<i class="fa fa-thumbs-up"></i> GOOD LUCK!',
+    confirmButtonText: '<i class="fa fa-thumbs-up"></i> GOOD LUCK!',
+    confirmButtonAriaLabel: 'Thumbs up, good luck!',
+  })
+})
+
+//listens for click on Card Values button and displays the info
+cardApp.cardValuesNode.addEventListener('click', function () {
+  cardApp.newGameSound.play();
+  Swal.fire({
+    title: '<strong>Card Values</strong>',
+    icon: 'info',
+    html: "These are the card values:<br>" +
+      "<br>Ace (A): 11 points or 1 point if you go over 21.<br>" +
+      "<br>Court cards (J, Q and K): 10 points.<br>" +
+      "<br>Rest of the deck: card points.<br>" +
+      "<br>The card suit (♠️, ♥️, ♣️, ♦️) has no influence in the outcome.<br>",
+
+    showCloseButton: true,
+    showCancelButton: false,
+    focusConfirm: false,
+    confirmButtonText: '<i class="fa fa-thumbs-up"></i> GOOD LUCK!',
     confirmButtonAriaLabel: 'Thumbs up, good luck!',
   })
 })
