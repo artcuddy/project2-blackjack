@@ -31,6 +31,7 @@ h1 {
   font-size: clamp(2rem, 1.4444444444444444rem + 2.7777777777777777vw, 5rem);
   text-align: center;
   color: #fff;
+  text-transform: uppercase;
 }
 
 h2 {
