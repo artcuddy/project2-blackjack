@@ -75,9 +75,9 @@ cardApp.newGameNode.addEventListener('click', function () {
 cardApp.instructionsNode.addEventListener('click', function () {
   cardApp.newGameSound.play();
   Swal.fire({
-    title: '<strong>How To Play</strong>',
+    title: '<strong>How To Play',
     icon: 'info',
-    html: "Hi Player,<br> Can you beat The Demon.<br>" +
+    html: "<br>Can you beat The Demon.<br>" +
       "<br>The goal of this game is to get as many points as possible but without going over 21 points, because then you will automatically lose the hand!<br>" +
       "<br>Press the 'NEW HAND' button to start a new round:<br>" +
       "<br>Then based on your cards score either click the 'HIT' button or 'STAY' button <br>" +
@@ -100,8 +100,7 @@ cardApp.cardValuesNode.addEventListener('click', function () {
   Swal.fire({
     title: '<strong>Card Values</strong>',
     icon: 'info',
-    html: "These are the card values:<br>" +
-      "<br>Ace (A): 11 points or 1 point if you go over 21.<br>" +
+    html:  "Ace (A): 11 points or 1 point if you go over 21.<br>" +
       "<br>Court cards (J, Q and K): 10 points.<br>" +
       "<br>Rest of the deck: card points.<br>" +
       "<br>The card suit (♠️, ♥️, ♣️, ♦️) has no influence in the outcome.<br>",
