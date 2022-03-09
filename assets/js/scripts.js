@@ -415,12 +415,12 @@ function incrementComputerGamesWon() {
  * player has lost 5 games or computer has lost 5 games
  */
 function gameOver() {
-  if (cardApp.computerGamesWonNode.innerText === '2') {
+  if (cardApp.computerGamesWonNode.innerText === '5') {
     cardApp.gameOver = true;
     cardApp.youLoseSound.play();
     document.getElementById('game-over-text').classList.add('visible');
     newHandReset();
-  } else if (cardApp.playerGamesWonNode.innerText === '2') {
+  } else if (cardApp.playerGamesWonNode.innerText === '5') {
     cardApp.gameOver = true;
     cardApp.youWinSound.play();
     document.getElementById('win-text').classList.add('visible');
