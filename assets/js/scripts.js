@@ -1,4 +1,4 @@
-// Global object to avoid global variable drama
+// Global object to avoid global variable issues
 var cardApp = {};
 
 // game variables 
@@ -24,7 +24,7 @@ cardApp.playerCardsNode = document.getElementById('player-cards');
 
 // other needed nodes
 cardApp.messageNode = document.getElementById('message');
-cardApp.newDeckNode = document.getElementById('new-game');
+cardApp.newGameNode = document.getElementById('new-game');
 cardApp.nextHandNode = document.getElementById('next-hand');
 cardApp.hitMeNode = document.getElementById('hit');
 cardApp.stayNode = document.getElementById('stay');
@@ -33,11 +33,29 @@ cardApp.gameOverRestart = document.getElementsByClassName('overlay-text');
 // Click event listeners
 cardApp.nextHandNode.addEventListener('click', newHand);
 cardApp.gameOverRestart.onclick = () => resetGameArea();
-//listens for click on new game button plays new game sound and calls getNewDeck function
-cardApp.newDeckNode.addEventListener('click', function () {
+
+//listens for click on new game button plays new game sound and calls getNewGame function
+cardApp.newGameNode.addEventListener('click', function () {
   cardApp.newGameSound.play();
-  getNewDeck();
-});
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: 'rgb(238, 2, 2)',
+    cancelButtonColor: 'green',
+    confirmButtonText: 'Yes, Restart Game!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+
+        getNewGame()
+
+    }
+  })
+})
+
+
+
 //listens for click on hit button plays hit sound and calls hitMe function
 cardApp.hitMeNode.addEventListener('click', function () {
   cardApp.hitSound.play();
@@ -67,19 +85,19 @@ cardApp.youWinSound = new Audio('../assets/audio/you_win.ogg');
 
 
 /**
- * Check if the DOM content has loaded and then run getNewDeck
+ * Check if the DOM content has loaded and then run getNewGame
  */
 if (document.readyState == 'loading') {
-  document.addEventListener('DOMContentLoaded', getNewDeck);
+  document.addEventListener('DOMContentLoaded', getNewGame);
 } else {
-  getNewDeck();
+  getNewGame();
 }
 
 /**
  * This function resets the game area and makes a call to the deckofcards API 
  * Returns 6 shuffled decks to start the game with
  */
-function getNewDeck() {
+function getNewGame() {
   resetGameArea();
   fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=6')
     .then(response => response.json())
@@ -344,12 +362,12 @@ function incrementComputerGamesWon() {
  * player has lost 5 games or computer has lost 5 games
  */
 function gameOver() {
-  if (cardApp.computerGamesWonNode.innerText === '2') {
+  if (cardApp.computerGamesWonNode.innerText === '5') {
     cardApp.gameOver = true;
     cardApp.youLoseSound.play();
     document.getElementById('game-over-text').classList.add('visible');
     newHandReset();
-  } else if (cardApp.playerGamesWonNode.innerText === '2') {
+  } else if (cardApp.playerGamesWonNode.innerText === '5') {
     cardApp.gameOver = true;
     cardApp.youWinSound.play();
     document.getElementById('win-text').classList.add('visible');

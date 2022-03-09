@@ -212,6 +212,15 @@ button:active {
   box-shadow: inset 0px 0px 14px 5px rgba(0, 0, 0, 0.75);
 }
 
+.admin-buttons {
+  margin: 1em;
+}
+
+/* New Game warning */
+.swal2-popup {
+  color:rgba(0, 0, 0, .8)
+}
+
 /* Footer area styling */
 footer {
   position: absolute;
