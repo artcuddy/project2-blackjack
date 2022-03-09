@@ -361,3 +361,11 @@ footer p:hover {
     padding: 1rem 1.5rem;
   }
 }
+
+/* smaller screens @ max 372px media queries */
+
+@media screen and (max-width: 372px) {
+  button {
+    font-size: 1rem;
+  }
+}
