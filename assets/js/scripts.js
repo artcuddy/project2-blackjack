@@ -46,7 +46,7 @@ cardApp.newGameNode.addEventListener('click', function () {
     showCancelButton: true,
     confirmButtonColor: 'rgb(238, 2, 2)',
     cancelButtonColor: 'green',
-    confirmButtonText: 'Yes, Restart Game!'
+    confirmButtonText: 'Yes, Reset Game!'
   }).then((result) => {
     if (result.isConfirmed) {
 
