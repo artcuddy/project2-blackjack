@@ -29,12 +29,34 @@ cardApp.nextHandNode = document.getElementById('next-hand');
 cardApp.hitMeNode = document.getElementById('hit');
 cardApp.stayNode = document.getElementById('stay');
 cardApp.gameOverRestart = document.getElementsByClassName('overlay-text');
+cardApp.instructions = document.getElementsByClassName('instructions-button');
+cardApp.rules = document.getElementsByClassName('rules-button');
 
 // Click event listeners
 cardApp.nextHandNode.addEventListener('click', newHand);
 cardApp.gameOverRestart.onclick = () => resetGameArea();
 
-//listens for click on new game button plays new game sound and calls getNewGame function
+//listens for click on new game button plays new game sound and calls getNewGame function. Then alerts wwith popup ito confrim reset
+cardApp.newGameNode.addEventListener('click', function () {
+  cardApp.newGameSound.play();
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: 'rgb(238, 2, 2)',
+    cancelButtonColor: 'green',
+    confirmButtonText: 'Yes, Restart Game!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+
+        getNewGame()
+
+    }
+  })
+})
+
+//listens for click on Instructions button and displays the info
 cardApp.newGameNode.addEventListener('click', function () {
   cardApp.newGameSound.play();
   Swal.fire({
