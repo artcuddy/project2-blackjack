@@ -35,15 +35,15 @@ cardApp.instructionsNode = document.getElementById('instructions-button');
 cardApp.cardValuesNode = document.getElementById('rules-button');
 
 // Audio
-cardApp.hitSound = new Audio('../assets/audio/hit.ogg');
-cardApp.newHandSound = new Audio('../assets/audio/newhand.ogg');
-cardApp.winSound = new Audio('../assets/audio/win.wav');
-cardApp.gameOverSound = new Audio('../assets/audio/gameover.wav');
-cardApp.newGameSound = new Audio('../assets/audio/new-game.ogg');
-cardApp.staySound = new Audio('../assets/audio/stay.wav');
-cardApp.tieSound = new Audio('../assets/audio/tie.ogg');
-cardApp.youLoseSound = new Audio('../assets/audio/you_lose.ogg');
-cardApp.youWinSound = new Audio('../assets/audio/you_win.ogg');
+cardApp.hitSound = new Audio('assets/audio/hit.ogg');
+cardApp.newHandSound = new Audio('assets/audio/newhand.ogg');
+cardApp.winSound = new Audio('assets/audio/win.wav');
+cardApp.gameOverSound = new Audio('assets/audio/gameover.wav');
+cardApp.newGameSound = new Audio('assets/audio/new-game.ogg');
+cardApp.staySound = new Audio('assets/audio/stay.wav');
+cardApp.tieSound = new Audio('assets/audio/tie.ogg');
+cardApp.youLoseSound = new Audio('assets/audio/you_lose.ogg');
+cardApp.youWinSound = new Audio('assets/audio/you_win.ogg');
 
 // Click event listeners
 cardApp.nextHandNode.addEventListener('click', newHand);
@@ -237,7 +237,7 @@ function newHand() {
       cardApp.computerCards.forEach((card, i) => {
         let cardDomElement = document.createElement('img');
         if (i === 0) {
-          cardDomElement.src = '../assets/images/card.png';
+          cardDomElement.src = 'assets/images/card.png';
         } else {
           cardDomElement.src = card.image;
         }
