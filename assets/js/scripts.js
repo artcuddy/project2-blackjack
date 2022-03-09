@@ -63,15 +63,21 @@ cardApp.instructionsNode.addEventListener('click', function () {
     title: '<strong>How To Play</strong>',
     icon: 'info',
     html:
-      'You can use <b>bold text</b>, ' +
-      '<a href="//sweetalert2.github.io">links</a> ' +
-      'and other HTML tags',
+      "Hi Player,<br> Can you beat The Demon.<br>" +
+      "<br>The goal of this game is to get as many points as possible but without going over 21 points, because then you will automatically lose the hand!<br>" +
+      "<br>Press the 'NEW HAND' button to start a new round:<br>" +
+      "<br>Then based on your cards score either click the 'HIT' button or 'STAY' button <br>" +
+      "<br>The 'HIT' button turns over a new card to your hand<br>" +
+      "<br>The 'STAY' button stops play for you and lets the Demon play<br>" +
+      "<br>Then it will be my turn to beat your score!<br>" +
+      "<br>The first one to win 5 rounds will be the final winner.<br>",
+     
     showCloseButton: true,
     showCancelButton: false,
     focusConfirm: false,
     confirmButtonText:
-      '<i class="fa fa-thumbs-up"></i> Great!',
-    confirmButtonAriaLabel: 'Thumbs up, great!',
+      '<i class="fa fa-thumbs-up"></i> GOOD LUCK!',
+    confirmButtonAriaLabel: 'Thumbs up, good luck!',
   })
 })
 

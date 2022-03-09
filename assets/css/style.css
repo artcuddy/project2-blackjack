@@ -228,15 +228,21 @@ button:active {
 
 .swal2-html-container {
   font-size: 1.4rem!important;
-  text-transform: uppercase!important;
+  /* text-transform: uppercase!important; */
   font-family: "Work Sans", "sans-serif";
   font-weight: 600!important;
+  line-height: 1.4em!important;
 }
 
 .swal2-styled {
   font-weight: 500!important;
 }
 
+/* Instructions area */
+.swal2-styled.swal2-confirm {
+  background-color:rgb(238, 2, 2)!important;
+  font-size: 1.4em!important;
+}
 /* Footer area styling */
 footer {
   position: absolute;
