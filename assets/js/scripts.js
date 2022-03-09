@@ -92,7 +92,7 @@ cardApp.instructionsNode.addEventListener('click', function () {
   });
 });
 
-//listens for click on Card Values button and displays the info
+//listens for click on Card Values button and displays the card value info
 cardApp.cardValuesNode.addEventListener('click', function () {
   cardApp.newGameSound.play();
   Swal.fire({
