@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 // Global object to avoid global variable issues
 var cardApp = {};
 var Swal;
