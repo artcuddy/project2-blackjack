@@ -228,7 +228,7 @@ button:active {
 
 .swal2-html-container {
   font-size: 1.4rem !important;
-  /* text-transform: uppercase!important; */
+  text-align: left!important;
   font-family: "Work Sans", "sans-serif";
   font-weight: 600 !important;
   line-height: 1.4em !important;

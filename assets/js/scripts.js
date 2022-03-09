@@ -1,5 +1,6 @@
 // Global object to avoid global variable issues
 var cardApp = {};
+var Swal;
 
 // game variables 
 cardApp.deckID = '';
@@ -11,6 +12,7 @@ cardApp.roundTied = false;
 cardApp.gameOver = false;
 cardApp.playerScore = 0;
 cardApp.computerScore = 0;
+cardApp.score = 0;
 
 // score nodes
 cardApp.computerScoreNode = document.getElementById('computer-score');
@@ -32,6 +34,17 @@ cardApp.gameOverRestart = document.getElementsByClassName('overlay-text');
 cardApp.instructionsNode = document.getElementById('instructions-button');
 cardApp.cardValuesNode = document.getElementById('rules-button');
 
+// Audio
+cardApp.hitSound = new Audio('../assets/audio/hit.ogg');
+cardApp.newHandSound = new Audio('../assets/audio/newhand.ogg');
+cardApp.winSound = new Audio('../assets/audio/win.wav');
+cardApp.gameOverSound = new Audio('../assets/audio/gameover.wav');
+cardApp.newGameSound = new Audio('../assets/audio/new-game.ogg');
+cardApp.staySound = new Audio('../assets/audio/stay.wav');
+cardApp.tieSound = new Audio('../assets/audio/tie.ogg');
+cardApp.youLoseSound = new Audio('../assets/audio/you_lose.ogg');
+cardApp.youWinSound = new Audio('../assets/audio/you_win.ogg');
+
 // Click event listeners
 cardApp.nextHandNode.addEventListener('click', newHand);
 cardApp.gameOverRestart.onclick = () => resetGameArea();
@@ -50,11 +63,11 @@ cardApp.newGameNode.addEventListener('click', function () {
   }).then((result) => {
     if (result.isConfirmed) {
 
-      getNewGame()
+      getNewGame();
 
     }
-  })
-})
+  });
+});
 
 //listens for click on Instructions button and displays the info
 cardApp.instructionsNode.addEventListener('click', function () {
@@ -76,8 +89,8 @@ cardApp.instructionsNode.addEventListener('click', function () {
     focusConfirm: false,
     confirmButtonText: '<i class="fa fa-thumbs-up"></i> GOOD LUCK!',
     confirmButtonAriaLabel: 'Thumbs up, good luck!',
-  })
-})
+  });
+});
 
 //listens for click on Card Values button and displays the info
 cardApp.cardValuesNode.addEventListener('click', function () {
@@ -96,8 +109,8 @@ cardApp.cardValuesNode.addEventListener('click', function () {
     focusConfirm: false,
     confirmButtonText: '<i class="fa fa-thumbs-up"></i> GOOD LUCK!',
     confirmButtonAriaLabel: 'Thumbs up, good luck!',
-  })
-})
+  });
+});
 
 //listens for click on hit button plays hit sound and calls hitMe function
 cardApp.hitMeNode.addEventListener('click', function () {
@@ -113,19 +126,6 @@ cardApp.stayNode.addEventListener('click', function () {
     computerPlays();
   }, 600);
 });
-
-
-// Audio
-cardApp.hitSound = new Audio('../assets/audio/hit.ogg');
-cardApp.newHandSound = new Audio('../assets/audio/newhand.ogg');
-cardApp.winSound = new Audio('../assets/audio/win.wav');
-cardApp.gameOverSound = new Audio('../assets/audio/gameover.wav');
-cardApp.newGameSound = new Audio('../assets/audio/new-game.ogg');
-cardApp.staySound = new Audio('../assets/audio/stay.wav');
-cardApp.tieSound = new Audio('../assets/audio/tie.ogg');
-cardApp.youLoseSound = new Audio('../assets/audio/you_lose.ogg');
-cardApp.youWinSound = new Audio('../assets/audio/you_win.ogg');
-
 
 /**
  * Check if the DOM content has loaded and then run getNewGame
@@ -150,7 +150,7 @@ function getNewGame() {
       cardApp.hitMeNode.style.display = 'none';
       cardApp.stayNode.style.display = 'none';
     })
-    .catch(console.error)
+    .catch(console.error);
 }
 
 /**
@@ -184,7 +184,7 @@ function resetGameArea() {
   overlays.forEach(overlay => {
     overlay.addEventListener('click', () => {
       overlay.classList.remove('visible');
-      resetGameArea()
+      resetGameArea();
       cardApp.newGameSound.play();
     });
   });
@@ -228,8 +228,8 @@ function newHand() {
       cardApp.hitMeNode.style.display = 'block';
       cardApp.stayNode.style.display = 'block';
       //output cards
-      cardApp.computerCards.push(response.cards[0], response.cards[1])
-      cardApp.playerCards.push(response.cards[2], response.cards[3])
+      cardApp.computerCards.push(response.cards[0], response.cards[1]);
+      cardApp.playerCards.push(response.cards[2], response.cards[3]);
 
       cardApp.computerScore = '?';
       cardApp.computerScoreNode.textContent = cardApp.computerScore;
@@ -241,14 +241,14 @@ function newHand() {
         } else {
           cardDomElement.src = card.image;
         }
-        cardApp.computerCardsNode.appendChild(cardDomElement)
-      })
+        cardApp.computerCardsNode.appendChild(cardDomElement);
+      });
 
       cardApp.playerCards.forEach(card => {
         let cardDomElement = document.createElement('img');
         cardDomElement.src = card.image;
-        cardApp.playerCardsNode.appendChild(cardDomElement)
-      })
+        cardApp.playerCardsNode.appendChild(cardDomElement);
+      });
       // you got black jack you win and the hit and stay buttons are removed
       cardApp.playerScore = calculateScore(cardApp.playerCards);
       if (cardApp.playerScore === 21) {
@@ -262,7 +262,7 @@ function newHand() {
       cardApp.playerScoreNode.textContent = cardApp.playerScore;
 
     })
-    .catch(console.error)
+    .catch(console.error);
 }
 
 /**
@@ -272,7 +272,7 @@ function newHand() {
 function hitMe(target) {
 
   if (cardApp.roundLost || cardApp.roundWon || cardApp.roundTied || cardApp.gameOver) {
-    return
+    return;
   }
   fetch(`https://deckofcardsapi.com/api/deck/${cardApp.deckID}/draw/?count=1`)
     .then(response => response.json())
@@ -280,10 +280,10 @@ function hitMe(target) {
 
       // If player is playing
       if (target === 'player') {
-        cardApp.playerCards.push(response.cards[0])
+        cardApp.playerCards.push(response.cards[0]);
         let cardDomElement = document.createElement('img');
         cardDomElement.src = response.cards[0].image;
-        cardApp.playerCardsNode.appendChild(cardDomElement)
+        cardApp.playerCardsNode.appendChild(cardDomElement);
 
         cardApp.playerScore = calculateScore(cardApp.playerCards);
 
@@ -291,7 +291,7 @@ function hitMe(target) {
         //you bust roundlost play game over sound and update computer games won
         if (cardApp.playerScore > 21) {
           cardApp.roundLost = true;
-          cardApp.messageNode.textContent = 'You Bust!'
+          cardApp.messageNode.textContent = 'You Bust!';
           cardApp.gameOverSound.play();
           incrementComputerGamesWon();
           gameOver();
@@ -302,15 +302,15 @@ function hitMe(target) {
       // If computer is playing
       if (target === 'computer') {
         let cardDomElement = document.createElement('img');
-        cardApp.computerCards.push(response.cards[0])
+        cardApp.computerCards.push(response.cards[0]);
         cardDomElement.src = response.cards[0].image;
-        cardApp.computerCardsNode.appendChild(cardDomElement)
+        cardApp.computerCardsNode.appendChild(cardDomElement);
         computerPlays();
         gameOver();
       }
 
     })
-    .catch(console.log)
+    .catch(console.log);
 }
 
 /**
@@ -319,7 +319,7 @@ function hitMe(target) {
  */
 function computerPlays() {
   if (cardApp.roundLost || cardApp.roundWon || cardApp.roundTied || cardApp.gameOver) {
-    return
+    return;
   }
   cardApp.computerScore = calculateScore(cardApp.computerCards);
   cardApp.computerScoreNode.textContent = cardApp.computerScore;
@@ -327,7 +327,7 @@ function computerPlays() {
   cardApp.hitSound.play();
 
   if (cardApp.computerScore < 17) {
-    setTimeout(() => hitMe('computer'), 900)
+    setTimeout(() => hitMe('computer'), 900);
   } else if (cardApp.computerScore > 21) {
     //computer bust roundwon play win sound and update player games won
     cardApp.roundWon = true;
@@ -366,20 +366,20 @@ function computerPlays() {
  */
 function calculateScore(playerCards) {
   let hasAce = false;
-  score = playerCards.reduce((acc, card) => {
+  cardApp.score = playerCards.reduce((acc, card) => {
     if (card.value === "ACE") {
       hasAce = true;
-      return acc + 1
+      return acc + 1;
     }
     if (isNaN(card.value)) {
-      return acc + 10
+      return acc + 10;
     }
     return acc + Number(card.value);
-  }, 0)
+  }, 0);
   if (hasAce) {
-    score = (score + 10) > 21 ? score : score + 10;
+    cardApp.score = (cardApp.score + 10) > 21 ? cardApp.score : cardApp.score + 10;
   }
-  return score
+  return cardApp.score;
 }
 
 /**
