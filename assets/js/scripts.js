@@ -29,8 +29,8 @@ cardApp.nextHandNode = document.getElementById('next-hand');
 cardApp.hitMeNode = document.getElementById('hit');
 cardApp.stayNode = document.getElementById('stay');
 cardApp.gameOverRestart = document.getElementsByClassName('overlay-text');
-cardApp.instructions = document.getElementsByClassName('instructions-button');
-cardApp.rules = document.getElementsByClassName('rules-button');
+cardApp.instructionsNode = document.getElementById('instructions-button');
+cardApp.rulesNode = document.getElementById('rules-button');
 
 // Click event listeners
 cardApp.nextHandNode.addEventListener('click', newHand);
@@ -57,26 +57,23 @@ cardApp.newGameNode.addEventListener('click', function () {
 })
 
 //listens for click on Instructions button and displays the info
-cardApp.newGameNode.addEventListener('click', function () {
-  cardApp.newGameSound.play();
+cardApp.instructionsNode.addEventListener('click', function () {
+  cardApp.staySound.play();
   Swal.fire({
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: 'rgb(238, 2, 2)',
-    cancelButtonColor: 'green',
-    confirmButtonText: 'Yes, Restart Game!'
-  }).then((result) => {
-    if (result.isConfirmed) {
-
-        getNewGame()
-
-    }
+    title: '<strong>How To Play</strong>',
+    icon: 'info',
+    html:
+      'You can use <b>bold text</b>, ' +
+      '<a href="//sweetalert2.github.io">links</a> ' +
+      'and other HTML tags',
+    showCloseButton: true,
+    showCancelButton: false,
+    focusConfirm: false,
+    confirmButtonText:
+      '<i class="fa fa-thumbs-up"></i> Great!',
+    confirmButtonAriaLabel: 'Thumbs up, great!',
   })
 })
-
-
 
 //listens for click on hit button plays hit sound and calls hitMe function
 cardApp.hitMeNode.addEventListener('click', function () {
