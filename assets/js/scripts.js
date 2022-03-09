@@ -64,6 +64,7 @@ cardApp.newGameNode.addEventListener('click', function () {
     if (result.isConfirmed) {
 
       getNewGame();
+      cardApp.newGameSound.play();
 
     }
   });

@@ -101,7 +101,7 @@ p {
   background-color: #141414;
   align-items: center;
   width: 100vw;
-  height: 85vh;
+  height: 89vh;
   background: url('../images/king-dice-large.webp') no-repeat center center;
   background-size: cover;
 }
@@ -111,7 +111,7 @@ p {
   position: relative;
   z-index: 1;
   width: 850px;
-  height: auto;
+  height: 440px;
   margin-left: auto;
   margin-right: auto;
   padding: 0 2rem 2rem 2rem;
@@ -187,8 +187,8 @@ button {
   text-transform: uppercase;
   color: #2e2e2e;
   line-height: 1.4em;
-  font-size: 1.6rem;
-  font-size: clamp(1.6rem, 1.5259259259259261rem + 0.37037037037037024vw, 2rem);
+  font-size: 1.4rem;
+  font-size: clamp(1.4rem, 1.362962962962963rem + 0.18518518518518534vw, 1.6rem);
   padding: 1rem 2rem;
   border-radius: 10px;
   outline: none;
@@ -213,6 +213,10 @@ button:active {
 }
 
 /* New Game warning */
+.swal2-shown .swal2-height-auto {
+  height: 100vh !important;
+}
+
 .swal2-icon.swal2-warning {
   border-color: rgb(238, 2, 2) !important;
   color: rgb(238, 2, 2) !important;
@@ -224,7 +228,7 @@ button:active {
 
 .swal2-html-container {
   font-size: 1.4rem !important;
-  text-align: left!important;
+  text-align: left !important;
   font-family: "Work Sans", "sans-serif";
   font-weight: 600 !important;
   line-height: 1.4em !important;
@@ -278,7 +282,7 @@ footer p:hover {
   .card-game-area {
     top: 20vh;
     width: 80%;
-    height: auto;
+    height: 380px;
   }
 
   .card-game-area #message {
