@@ -93,12 +93,12 @@ p {
 
 /* Game area styling */
 .bg-image {
-  width: 894px;
+  width: 90%;
   z-index: -1;
   position: absolute;
   right: 0;
   left: 0;
-  top: -50vh;
+  top: -90%;
   bottom: 0;
   margin: auto auto;
 }
@@ -120,16 +120,11 @@ p {
   background: #fff;
   border-radius: 10px;
   border: solid #000 5px;
-  width: 850px;
-  height: 450px;
+  width: 57%;
+  height: 46%;
 }
 
 /* Cards area styling */
-.computer-area {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-
 .computer-area h3 {
   margin-top: 1rem;
 }
@@ -137,7 +132,7 @@ p {
 #computer-cards {
   display: flex;
   justify-content: center;
-  height: 130px;
+  height: 12rem;
 }
 
 .card-game-area #message {
@@ -156,7 +151,7 @@ p {
 #player-cards {
   display: flex;
   justify-content: center;
-  height: 130px;
+  height: 12rem;
 }
 
 .player-area h3 {
@@ -167,7 +162,7 @@ p {
 .game-buttons {
   position: absolute;
   right: 10px;
-  bottom: -10%;
+  bottom: -12%;
   z-index: 10;
   width: 100%;
   display: flex;
@@ -217,7 +212,8 @@ button:active {
   background-color: #00ffff;
 }
 
-/* New Game warning */
+/* New Game warning and info popups */
+
 .swal2-popup {
   width: 45em !important;
   background: #000 !important;
@@ -268,8 +264,9 @@ footer {
   justify-content: center;
 }
 
-/* smaller screens @ max 900px media queries */
-@media screen and (max-width: 900px) {
+/* smaller screens @ max 1024px media queries */
+
+@media screen and (max-width: 1024px) {
 
   header {
     padding: 1rem;
@@ -288,7 +285,7 @@ footer {
   .card-game-area {
     top: 45vh;
     width: 80%;
-    height: 400px;
+    height: 320px;
   }
 
   .message-area {
@@ -300,13 +297,13 @@ footer {
   }
 
   #player-cards {
-    height: 100px;
-    margin-top: 10px;
+    height: 8rem;
+    margin-top: 1rem;
   }
 
   #computer-cards {
-    height: 100px;
-    margin-top: 10px;
+    height: 8rem;
+    margin-top: 1rem;
   }
 
   .left-box {
@@ -330,7 +327,7 @@ footer {
 
   .game-buttons {
     display: flex;
-    bottom: -10%;
+    bottom: -12%;
     right: 0;
   }
 
@@ -359,13 +356,20 @@ footer {
 }
 
 /* smaller screens @ max 600px media queries */
-@media screen and (max-width: 600px) {
 
+@media screen and (max-width: 600px) {
   button {
     font-size: 1.2rem;
     padding: 1rem 1.5rem;
   }
 
+  .bg-image {
+    top: -50vh;
+  }
+
+  .computer-area {
+    margin-bottom: 1rem;
+  }
 }
 
 /* smaller screens @ max 372px media queries */
@@ -377,5 +381,18 @@ footer {
 
   .bg-image {
     top: -40vh;
+  }
+}
+
+/* larger screens @ min 1400px media queries */
+
+@media screen and (min-width: 1200px) {
+  .bg-image {
+    width: 100%;
+  }
+
+  .card-game-area {
+    width: 850px;
+    height: 450px;
   }
 }
