@@ -100,10 +100,10 @@ cardApp.cardValuesNode.addEventListener('click', function () {
   Swal.fire({
     title: '<strong>Card Values</strong>',
     icon: 'info',
-    html:  "Ace (A): 11 points or 1 point if you go over 21.<br>" +
-      "<br>Court cards (J, Q and K): 10 points.<br>" +
-      "<br>Rest of the deck: card points.<br>" +
-      "<br>The card suit (♠️, ♥️, ♣️, ♦️) has no influence in the outcome.<br>",
+    html: "Ace (A): 11 points or 1 point if you go over 21.<br>" +
+      "<br>Court cards (J, Q and K) = 10 points.<br>" +
+      "<br>Rest of the deck = card points.<br>" +
+      "<br>The card suit (♠️, ♥️, ♣️, ♦️) has no influence on the outcome.<br>",
 
     showCloseButton: true,
     showCancelButton: false,

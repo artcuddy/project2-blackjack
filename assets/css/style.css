@@ -12,11 +12,6 @@ html {
   border: none;
 }
 
-a {
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
 body {
   background-color: #141414;
 }
@@ -32,6 +27,7 @@ h1 {
   text-align: center;
   color: #fff;
   text-transform: uppercase;
+  -webkit-text-stroke: 1px rgb(238, 2, 2);
 }
 
 h2 {
@@ -57,7 +53,6 @@ p {
   font-size: 1.6rem;
   font-size: clamp(1.6rem, 1.5259259259259261rem + 0.37037037037037024vw, 2rem);
 }
-
 
 .overlay-text {
   top: 0;
@@ -97,28 +92,36 @@ p {
 }
 
 /* Game area styling */
+.bg-image {
+  width: 894px;
+  z-index: -1;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: -50vh;
+  bottom: 0;
+  margin: auto auto;
+}
+
 .game-wrapper {
-  position: relative;
-  background-color: #141414;
-  align-items: center;
   width: 100vw;
-  height: 89vh;
-  background: url('../images/king-dice-large.webp') no-repeat center center;
-  background-size: cover;
+  height: 100vh;
+  position: relative;
 }
 
 .card-game-area {
-  top: 36vh;
-  position: relative;
-  z-index: 1;
-  width: 850px;
-  height: auto;
-  margin-left: auto;
-  margin-right: auto;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto auto;
   padding: 0 2rem 2rem 2rem;
   background: #fff;
   border-radius: 10px;
   border: solid #000 5px;
+  width: 850px;
+  height: 450px;
 }
 
 /* Cards area styling */
@@ -215,6 +218,13 @@ button:active {
 }
 
 /* New Game warning */
+
+.swal2-popup {
+  width: 45em !important;
+  background: #000 !important;
+  color: #fff !important;
+}
+
 .swal2-shown .swal2-height-auto {
   height: 100vh !important;
 }
@@ -225,19 +235,23 @@ button:active {
 }
 
 .swal2-title {
-  color: #000 !important;
+  color: #fff !important;
 }
 
 .swal2-html-container {
   font-size: 1.4rem !important;
-  text-align: left !important;
-  font-family: "Work Sans", "sans-serif";
-  font-weight: 600 !important;
+  text-align: center !important;
+  font-family: "Work Sans", "sans-serif" !important;
+  font-weight: 400 !important;
   line-height: 1.4em !important;
 }
 
 .swal2-styled {
   font-weight: 500 !important;
+}
+
+.swal2-container.swal2-backdrop-show {
+  background: rgba(0, 0, 0, .8) !important;
 }
 
 /* Instructions area */
@@ -255,18 +269,6 @@ footer {
   justify-content: center;
 }
 
-footer a {
-  margin: 2rem;
-}
-
-footer p {
-  color: #fff;
-}
-
-footer p:hover {
-  color: rgb(238, 2, 2);
-}
-
 /* smaller screens @ max 900px media queries */
 
 @media screen and (max-width: 900px) {
@@ -276,15 +278,19 @@ footer p:hover {
     line-height: 1.4;
   }
 
+  .bg-image {
+    width: 100%;
+  }
+
   .game-wrapper {
     width: 100%;
     height: 40vh;
   }
 
   .card-game-area {
-    top: 20vh;
+    top: 45vh;
     width: 80%;
-    height: auto;
+    height: 400px;
   }
 
   .message-area {
@@ -354,12 +360,16 @@ footer p:hover {
 
 }
 
-/* smaller screens @ max 500px media queries */
+/* smaller screens @ max 600px media queries */
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
   button {
     font-size: 1.2rem;
     padding: 1rem 1.5rem;
+  }
+
+  .bg-image {
+    top: -45vh;
   }
 }
 
@@ -368,5 +378,9 @@ footer p:hover {
 @media screen and (max-width: 372px) {
   button {
     font-size: 1rem;
+  }
+
+  .bg-image {
+    top: -40vh;
   }
 }
