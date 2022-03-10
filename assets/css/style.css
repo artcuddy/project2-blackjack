@@ -167,7 +167,7 @@ p {
 .game-buttons {
   position: absolute;
   right: 10px;
-  bottom: -15%;
+  bottom: -10%;
   z-index: 10;
   width: 100%;
   display: flex;
@@ -330,7 +330,7 @@ footer {
 
   .game-buttons {
     display: flex;
-    bottom: -15%;
+    bottom: -10%;
     right: 0;
   }
 
