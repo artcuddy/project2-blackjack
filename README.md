@@ -57,7 +57,7 @@ ___
   + The site has been tested with Lighthouse and is 100% Accessible, 100% Best Practices, 100% SEO & 97% Performance scores
    
 
-![alt text](docs/screenshots/lighthouse-screenshot.png "Screen shot of the Lighthouse results")
+![alt text](docs/screenshots/lighthouse-score.png "Screen shot of the Lighthouse results")
 
 + Responsive design
   + The site has been tested on Iphone12, Ipad and desktop and is responsive
@@ -97,7 +97,8 @@ The live link can be found here - <https://artcuddy.github.io/project2-blackjack
   + All icons are from [Font Awesome](https://fontawesome.com/ "Font Awesome")
   + All fonts are from [Google Fonts](https://fonts.google.com/ "Google Fonts")
 
-+ Media
++ Media and Libraries
   + Background digital artwork created by my son Alfie Cuddy (12 Years Old)
   + Popup notifications created with [Sweet Alert 2](https://sweetalert2.github.io/ "Sweet Alert 2")
   + Inspiration for the game build from this tutorial by Ethan Jarrel on [Hackernoon](https://hackernoon.com/blackjack-application-with-javascript-2c76db51dea7 "Hackernoon") 
+  + Cards created with [Deck of Cards API](https://deckofcardsapi.com/ "Deck of Cards API")
