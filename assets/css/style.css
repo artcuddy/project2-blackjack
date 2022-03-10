@@ -218,7 +218,6 @@ button:active {
 }
 
 /* New Game warning */
-
 .swal2-popup {
   width: 45em !important;
   background: #000 !important;
@@ -270,7 +269,6 @@ footer {
 }
 
 /* smaller screens @ max 900px media queries */
-
 @media screen and (max-width: 900px) {
 
   header {
@@ -361,16 +359,13 @@ footer {
 }
 
 /* smaller screens @ max 600px media queries */
-
 @media screen and (max-width: 600px) {
+
   button {
     font-size: 1.2rem;
     padding: 1rem 1.5rem;
   }
 
-  .bg-image {
-    top: -45vh;
-  }
 }
 
 /* smaller screens @ max 372px media queries */
