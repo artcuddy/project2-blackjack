@@ -27,6 +27,10 @@ Offer the puclic a free game, easy to use to enjoy a game of BlackJack.
 
   + Clicking on the card value button shows information on the value of the cards in the game
 
+  + Sounds are played when pressing the hit, stay & reset game buttons
+
+  + When you win or lose an ovelay screen will be shown indicating that the game is over and sound is played.
+
 ![alt text](docs/screenshots/game-area.png "Screenshot game buttons")
 
 ![alt text](docs/screenshots/game-buttons.png "Screenshot game buttons")
