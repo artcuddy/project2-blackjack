@@ -29,7 +29,7 @@ Offer the puclic a free game, easy to use to enjoy a game of BlackJack.
 
   + Sounds are played when pressing the hit, stay & reset game buttons
 
-  + When you win or lose an ovelay screen will be shown indicating that the game is over and sound is played.
+  + When you win or lose an overlay screen will be shown indicating that the game is over and sound is played.
 
 ![alt text](docs/screenshots/game-area.png "Screenshot game buttons")
 
