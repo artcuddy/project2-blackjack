@@ -7,6 +7,12 @@ The goal of this game is to get as many points as possible but without going ove
 ![alt text](docs/screenshots/game-screen-shot.png "Screenshot of Demon BlackJack Game")
 ---
 
+# User stories
+Users of this website will be able to play the game of Blackjack against the computer.  
+
+# Website owner
+Offer the puclic a free game, easy to use to enjoy a game of BlackJack.  
+
 # Game Features
 
 + **Game Play**
@@ -17,6 +23,10 @@ The goal of this game is to get as many points as possible but without going ove
   
   + Two information buttons, One for the game instructions and the other for the Card Values in the game
 
+  + Clicking on the instruction button shows information on how to play the game
+
+  + Clicking on the card value button shows information on the value of the cards in the game
+
 ![alt text](docs/screenshots/game-area.png "Screenshot game buttons")
 
 ![alt text](docs/screenshots/game-buttons.png "Screenshot game buttons")
@@ -25,7 +35,7 @@ ___
 
 ## Future Features
 
-+ Add individual beer pages with more information
++ Add player name submission 
 ___
 
 ## Typography & Colour Scheme
@@ -49,6 +59,8 @@ ___
 + Javascript
 + Gitpod
 + Github
++ Sweet Alert2 
++ Deck of Cards API
 ___
 
 # Testing
@@ -60,7 +72,7 @@ ___
 ![alt text](docs/screenshots/lighthouse-score.png "Screen shot of the Lighthouse results")
 
 + Responsive design
-  + The site has been tested on Iphone12, Ipad and desktop and is responsive
+  + The website was tested using Chrome developer tools and Mozilla Developer tools. The website was tested with Chrome, Mozilla, Safari and Edge browsers on both a Mac computer and a Windows computer, it was also tested for mobile on an iPhone 6, iPhone 11, iPhone 13 Pro, Pixel 4, Pixel 5 and Galaxy S10.  
 
 ![alt text](docs/screenshots/reponsive-screenshot-new.png "Screen shot of the Lighthouse results")
 ___
@@ -80,6 +92,8 @@ ___
   + Found some issues with the reponsive CSS due to the game area having to be a certain size to be able to play the game.
   + Fixed the issues as best I could 
 
+# Unfixed Bugs
+None found at the moment.  
   ___
 # Deployment
 
@@ -100,7 +114,7 @@ The live link can be found here - <https://artcuddy.github.io/project2-blackjack
   + All fonts are from [Google Fonts](https://fonts.google.com/ "Google Fonts")
 
 + Media and Libraries
-  + Background digital artwork created by my son Alfie Cuddy (12 Years Old)
+  + Background digital artwork of King Dice created by my son Alfie Cuddy (12 Years Old)
   + Popup notifications created with [Sweet Alert 2](https://sweetalert2.github.io/ "Sweet Alert 2")
   + Inspiration for the game build from this tutorial by Ethan Jarrel on [Hackernoon](https://hackernoon.com/blackjack-application-with-javascript-2c76db51dea7 "Hackernoon") 
   + Cards created with [Deck of Cards API](https://deckofcardsapi.com/ "Deck of Cards API")
