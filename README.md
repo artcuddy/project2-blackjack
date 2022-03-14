@@ -61,6 +61,8 @@ ___
 
 + Responsive design
   + The site has been tested on Iphone12, Ipad and desktop and is responsive
+
+![alt text](docs/screenshots/reponsive-screenshot-new.png "Screen shot of the Lighthouse results")
 ___
 # Validator Testing
 
