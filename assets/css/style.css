@@ -327,10 +327,6 @@ footer {
     right: 0;
   }
 
-  .admin-buttons {
-    margin: 2em;
-  }
-
   .overlay-text.visible {
     display: flex;
     animation: overlay-grow 500ms forwards;
