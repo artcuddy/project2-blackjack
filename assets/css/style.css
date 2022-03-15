@@ -154,6 +154,10 @@ p {
   height: 12rem;
 }
 
+.player-area {
+  margin-top: .5rem;
+}
+
 .player-area h3 {
   margin-top: 1rem;
 }
