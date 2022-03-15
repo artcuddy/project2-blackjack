@@ -36,15 +36,15 @@ cardApp.instructionsNode = document.getElementById('instructions-button');
 cardApp.cardValuesNode = document.getElementById('rules-button');
 
 // Audio
-cardApp.hitSound = new Audio('assets/audio/hit.ogg');
-cardApp.newHandSound = new Audio('assets/audio/newhand.ogg');
+cardApp.hitSound = new Audio('assets/audio/hit.wav');
+cardApp.newHandSound = new Audio('assets/audio/newhand.wav');
 cardApp.winSound = new Audio('assets/audio/win.wav');
 cardApp.gameOverSound = new Audio('assets/audio/gameover.wav');
-cardApp.newGameSound = new Audio('assets/audio/new-game.ogg');
+cardApp.newGameSound = new Audio('assets/audio/new-game.wav');
 cardApp.staySound = new Audio('assets/audio/stay.wav');
-cardApp.tieSound = new Audio('assets/audio/tie.ogg');
-cardApp.youLoseSound = new Audio('assets/audio/you_lose.ogg');
-cardApp.youWinSound = new Audio('assets/audio/you_win.ogg');
+cardApp.tieSound = new Audio('assets/audio/tie.wav');
+cardApp.youLoseSound = new Audio('assets/audio/you_lose.wav');
+cardApp.youWinSound = new Audio('assets/audio/you_win.wav');
 
 // Click event listeners
 cardApp.nextHandNode.addEventListener('click', newHand);
