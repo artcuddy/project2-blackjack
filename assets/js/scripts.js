@@ -98,7 +98,6 @@ cardApp.cardValueGoodLuckButton.addEventListener('click', function () {
 cardApp.hitMeNode.addEventListener('click', function () {
   cardApp.hitSound.play();
   hitMe('player');
-
 });
 
 //listens for click on stay button plays stay sound sets a delay for the demon and hides hit button
@@ -109,6 +108,14 @@ cardApp.stayNode.addEventListener('click', function () {
     computerPlays();
   }, 600);
 });
+
+/**
+ * This function outputs an error message if something goes wrong with the game
+ */
+function errorMessage() {
+  document.getElementById('instructions-modal').classList.add('visible');
+  document.getElementById('instructions-modal').innerHTML = `<h3>Sorry but we cannot connect to the server at this time please try again later</h3>`;
+}
 
 /**
  * This function resets the game area and makes a call to the deckofcards API 
@@ -123,7 +130,9 @@ function getNewGame() {
       cardApp.nextHandNode.style.display = 'block';
       hidePlayButtons();
     })
-    .catch(console.error);
+    .catch(error => {
+      (errorMessage(), error);
+    });
 }
 
 /**
@@ -236,7 +245,6 @@ function newHand() {
     })
 };
 
-
 /**
  * This function hides the hit and stay buttons
  */
@@ -303,8 +311,11 @@ function hitMe(target) {
       }
 
     })
-    .catch(console.log);
+    .catch(error => {
+      (errorMessage(), error);
+    });
 }
+
 
 /**
  * This function adds a card to the computers hand until one of the conditions is met
