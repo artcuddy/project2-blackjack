@@ -230,15 +230,16 @@ button:active {
   align-items: center;
   flex-direction: column;
   background-color: #000000e3;
-  font-family: 'Press Start 2P', 'sans-serif';;
+  font-family: 'Press Start 2P', 'sans-serif';
+  ;
 }
 
 .game-modal h2 {
-  color:#fff;
+  color: #fff;
 }
 
 .game-modal h3 {
-  color:#fff;
+  color: #fff;
   margin-top: 1rem;
   line-height: 1.6em;
   text-align: center;
@@ -250,8 +251,8 @@ button:active {
 }
 
 #confirm-button {
-    background-color: rgb(238, 2, 2);
-    color: #fff;
+  background-color: rgb(238, 2, 2);
+  color: #fff;
 }
 
 .good-luck-button {

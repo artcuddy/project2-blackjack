@@ -136,6 +136,8 @@ The live link can be found here - <https://artcuddy.github.io/project2-blackjack
   ___
 # Credits
 
++ My Code Institute mentor Rohit Sharma for keeping me on track with the code
+
 + Content
   + All icons are from [Font Awesome](https://fontawesome.com/ "Font Awesome")
   + All fonts are from [Google Fonts](https://fonts.google.com/ "Google Fonts")
