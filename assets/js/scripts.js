@@ -51,7 +51,7 @@ cardApp.youWinSound = new Audio('assets/audio/you_win.wav');
 cardApp.nextHandNode.addEventListener('click', newHand);
 cardApp.gameOverRestart.onclick = () => resetGameArea();
 
-//listens for click on new game button plays new game sound and calls getNewGame function. Then alerts wwith popup ito confrim reset
+//listens for click on new game button plays new game sound and calls getNewGame function. Then alerts with popup to confrim reset
 cardApp.newGameNode.addEventListener('click', function () {
   cardApp.newGameSound.play();
   Swal.fire({
@@ -120,7 +120,7 @@ cardApp.hitMeNode.addEventListener('click', function () {
   hitMe('player');
 
 });
-//listens for click on stay button plays stay sound sets a delay for the computer and hides hit button
+//listens for click on stay button plays stay sound sets a delay for the demon and hides hit button
 cardApp.stayNode.addEventListener('click', function () {
   cardApp.staySound.play();
   cardApp.hitMeNode.style.display = 'none';
@@ -217,7 +217,7 @@ function newHandReset() {
 }
 
 /**
- * This function resets the game area, makes an API call to the deckofcards API and returns 2 cards for the player and 2 for the computer
+ * This function resets the game area, makes an API call to the deckofcards API and returns 2 cards for the player and 2 for the demon
  */
 function newHand() {
   newHandReset();
@@ -251,7 +251,7 @@ function newHand() {
         cardDomElement.src = card.image;
         cardApp.playerCardsNode.appendChild(cardDomElement);
       });
-      // you got black jack you win and the hit and stay buttons are removed
+      // you got black jack you win and the hit and stay buttons are removed and win sound played
       cardApp.playerScore = calculateScore(cardApp.playerCards);
       if (cardApp.playerScore === 21) {
         cardApp.roundWon = true;
@@ -318,7 +318,7 @@ function hitMe(target) {
 }
 
 /**
- * This function adds a card to the copmuters hand until one of the conditions is met
+ * This function adds a card to the computers hand until one of the conditions is met
  * also checks if the round was won, lost, tied or game over 
  */
 function computerPlays() {
