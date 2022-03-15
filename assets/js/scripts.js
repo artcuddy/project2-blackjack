@@ -46,6 +46,7 @@ cardApp.tieSound = new Audio('assets/audio/tie.wav');
 cardApp.youLoseSound = new Audio('assets/audio/you_lose.wav');
 cardApp.youWinSound = new Audio('assets/audio/you_win.wav');
 
+
 // Click event listeners
 cardApp.nextHandNode.addEventListener('click', newHand);
 cardApp.gameOverRestart.onclick = () => resetGameArea();

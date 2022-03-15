@@ -292,6 +292,10 @@ footer {
     font-size: 1.5rem;
   }
 
+  .player-area h3 {
+    margin-top: 1rem;
+  }
+
   #player-cards {
     height: 8rem;
     margin-top: 1rem;
