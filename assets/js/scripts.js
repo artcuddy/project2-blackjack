@@ -1,7 +1,6 @@
 /*jshint esversion: 6 */
 // Global object to avoid global variable issues
 var cardApp = {};
-var Swal;
 
 // game variables 
 cardApp.deckID = '';
@@ -34,6 +33,10 @@ cardApp.stayNode = document.getElementById('stay');
 cardApp.gameOverRestart = document.getElementsByClassName('overlay-text');
 cardApp.instructionsNode = document.getElementById('instructions-button');
 cardApp.cardValuesNode = document.getElementById('rules-button');
+cardApp.cancelButton = document.getElementById('cancel-button');
+cardApp.confirmButton = document.getElementById('confirm-button');
+cardApp.instructionsGoodLuckButton = document.getElementById('instructions-good-luck-button');
+cardApp.cardValueGoodLuckButton = document.getElementById('card-value-good-luck-button');
 
 // Audio
 cardApp.hitSound = new Audio('assets/audio/hit.wav');
@@ -54,64 +57,41 @@ cardApp.gameOverRestart.onclick = () => resetGameArea();
 //listens for click on new game button plays new game sound and calls getNewGame function. Then alerts with popup to confrim reset
 cardApp.newGameNode.addEventListener('click', function () {
   cardApp.newGameSound.play();
-  Swal.fire({
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: 'rgb(238, 2, 2)',
-    cancelButtonColor: 'green',
-    confirmButtonText: 'Yes, Reset Game!'
-  }).then((result) => {
-    if (result.isConfirmed) {
-
-      getNewGame();
-      cardApp.newGameSound.play();
-
-    }
-  });
+  document.getElementById('reset-game-modal').classList.add('visible');
 });
 
-//listens for click on Instructions button and displays the info
-cardApp.instructionsNode.addEventListener('click', function () {
-  cardApp.newGameSound.play();
-  Swal.fire({
-    title: '<strong>How To Play',
-    icon: 'info',
-    html: "<br>Can you beat The Demon.<br>" +
-      "<br>The goal of this game is to get as many points as possible but without going over 21 points, because then you will automatically lose the hand!<br>" +
-      "<br>Press the 'NEW HAND' button to start a new round:<br>" +
-      "<br>Then based on your cards score either click the 'HIT' button or 'STAY' button <br>" +
-      "<br>The 'HIT' button turns over a new card to your hand<br>" +
-      "<br>The 'STAY' button stops play for you and lets the Demon play<br>" +
-      "<br>Then it will be my turn to beat your score!<br>" +
-      "<br>The first one to win 5 rounds will be the final winner.<br>",
+//listens for click on cancel button 
+cardApp.cancelButton.addEventListener('click', function () {
+  document.getElementById('reset-game-modal').classList.remove('visible');
+});
 
-    showCloseButton: true,
-    showCancelButton: false,
-    focusConfirm: false,
-    confirmButtonText: '<i class="fa fa-thumbs-up"></i> GOOD LUCK!',
-    confirmButtonAriaLabel: 'Thumbs up, good luck!',
-  });
+//listens for click on confirm button 
+cardApp.confirmButton.addEventListener('click', function () {
+  document.getElementById('reset-game-modal').classList.remove('visible');
+  cardApp.newGameSound.play();
+  getNewGame();
+});
+
+//listens for click on instructions button 
+cardApp.instructionsNode.addEventListener('click', function () {
+  document.getElementById('instructions-modal').classList.add('visible');
+  cardApp.newGameSound.play();
+});
+
+//listens for click on Good luck button  button 
+cardApp.instructionsGoodLuckButton.addEventListener('click', function () {
+  document.getElementById('instructions-modal').classList.remove('visible');
 });
 
 //listens for click on Card Values button and displays the card value info
 cardApp.cardValuesNode.addEventListener('click', function () {
+  document.getElementById('card-values-modal').classList.add('visible');
   cardApp.newGameSound.play();
-  Swal.fire({
-    title: '<strong>Card Values</strong>',
-    icon: 'info',
-    html: "Ace (A): 11 points or 1 point if you go over 21.<br>" +
-      "<br>Court cards (J, Q and K) = 10 points.<br>" +
-      "<br>Rest of the deck = card points.<br>" +
-      "<br>The card suit (♠️, ♥️, ♣️, ♦️) has no influence on the outcome.<br>",
+});
 
-    showCloseButton: true,
-    showCancelButton: false,
-    focusConfirm: false,
-    confirmButtonText: '<i class="fa fa-thumbs-up"></i> GOOD LUCK!',
-    confirmButtonAriaLabel: 'Thumbs up, good luck!',
-  });
+//listens for click on Good luck button  button 
+cardApp.cardValueGoodLuckButton.addEventListener('click', function () {
+  document.getElementById('card-values-modal').classList.remove('visible');
 });
 
 //listens for click on hit button plays hit sound and calls hitMe function
@@ -120,6 +100,7 @@ cardApp.hitMeNode.addEventListener('click', function () {
   hitMe('player');
 
 });
+
 //listens for click on stay button plays stay sound sets a delay for the demon and hides hit button
 cardApp.stayNode.addEventListener('click', function () {
   cardApp.staySound.play();
@@ -128,15 +109,6 @@ cardApp.stayNode.addEventListener('click', function () {
     computerPlays();
   }, 600);
 });
-
-/**
- * Check if the DOM content has loaded and then run getNewGame
- */
-if (document.readyState == 'loading') {
-  document.addEventListener('DOMContentLoaded', getNewGame);
-} else {
-  getNewGame();
-}
 
 /**
  * This function resets the game area and makes a call to the deckofcards API 
@@ -149,14 +121,13 @@ function getNewGame() {
     .then(response => {
       cardApp.deckID = response.deck_id;
       cardApp.nextHandNode.style.display = 'block';
-      cardApp.hitMeNode.style.display = 'none';
-      cardApp.stayNode.style.display = 'none';
+      hidePlayButtons();
     })
     .catch(console.error);
 }
 
 /**
- * This function resets the game area by setting all game variables to default settings
+ * This function resets the game area by setting all game variables to the default settings
  * Clears the card area
  */
 function resetGameArea() {
@@ -227,8 +198,8 @@ function newHand() {
 
       cardApp.newHandSound.play();
       //display the hit and stay buttons
-      cardApp.hitMeNode.style.display = 'block';
-      cardApp.stayNode.style.display = 'block';
+      showPlayButtons();
+
       //output cards
       cardApp.computerCards.push(response.cards[0], response.cards[1]);
       cardApp.playerCards.push(response.cards[2], response.cards[3]);
@@ -258,14 +229,33 @@ function newHand() {
         cardApp.messageNode.textContent = 'BlackJack! You Win!';
         cardApp.winSound.play();
         incrementPlayerGamesWon();
-        cardApp.hitMeNode.style.display = 'none';
-        cardApp.stayNode.style.display = 'none';
+        hidePlayButtons();
       }
       cardApp.playerScoreNode.textContent = cardApp.playerScore;
 
     })
-    .catch(console.error);
-}
+};
+
+
+/**
+ * This function hides the hit and stay buttons
+ */
+function hidePlayButtons() {
+
+  cardApp.hitMeNode.style.display = 'none';
+  cardApp.stayNode.style.display = 'none';
+
+};
+
+/**
+ * This function shows the hit and stay buttons
+ */
+function showPlayButtons() {
+
+  cardApp.hitMeNode.style.display = 'block';
+  cardApp.stayNode.style.display = 'block';
+
+};
 
 /**
  * This function adds a card to the players hand when the hit button is clicked
@@ -294,8 +284,7 @@ function hitMe(target) {
         if (cardApp.playerScore > 21) {
           cardApp.roundLost = true;
           cardApp.messageNode.textContent = 'You Bust!';
-          cardApp.hitMeNode.style.display = 'none';
-          cardApp.stayNode.style.display = 'none';
+          hidePlayButtons();
           cardApp.gameOverSound.play();
           incrementComputerGamesWon();
           gameOver();
@@ -334,21 +323,19 @@ function computerPlays() {
   if (cardApp.computerScore < 17) {
     setTimeout(() => hitMe('computer'), 900);
   } else if (cardApp.computerScore > 21) {
-    //computer bust roundwon play win sound and update player games won
+    //computer bust you won the round play win sound and update player games won
     cardApp.roundWon = true;
     cardApp.messageNode.textContent = 'Demon bust!';
     cardApp.winSound.play();
-    cardApp.hitMeNode.style.display = 'none';
-    cardApp.stayNode.style.display = 'none';
+    hidePlayButtons();
     incrementPlayerGamesWon();
     gameOver();
   } else if (cardApp.computerScore > cardApp.playerScore) {
-    //you lost roundlost play game over sound and update computer games won
+    //you lost the round play game over sound and update computer games won
     cardApp.roundLost = true;
     cardApp.messageNode.textContent = 'You Lost!';
     cardApp.gameOverSound.play();
-    cardApp.hitMeNode.style.display = 'none';
-    cardApp.stayNode.style.display = 'none';
+    hidePlayButtons();
     incrementComputerGamesWon();
     gameOver();
   } else if (cardApp.computerScore === cardApp.playerScore) {
@@ -356,16 +343,14 @@ function computerPlays() {
     cardApp.roundTied = true;
     cardApp.messageNode.textContent = "It's a Tie";
     cardApp.tieSound.play();
-    cardApp.stayNode.style.display = 'none';
-    cardApp.hitMeNode.style.display = 'none';
+    hidePlayButtons();
     gameOver();
   } else {
     //you won the round play win sound and update players games won
     cardApp.roundWon = true;
     cardApp.messageNode.textContent = 'You Won!';
     cardApp.winSound.play();
-    cardApp.hitMeNode.style.display = 'none';
-    cardApp.stayNode.style.display = 'none';
+    hidePlayButtons();
     incrementPlayerGamesWon();
     gameOver();
   }
@@ -428,3 +413,8 @@ function gameOver() {
     newHandReset();
   }
 }
+
+/**
+ * Check if the window has loaded and then run getNewGame
+ */
+window.onload = getNewGame();

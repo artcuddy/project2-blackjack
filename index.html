@@ -66,6 +66,41 @@
         </div>
 
     </section>
+    <section>
+        <div id='reset-game-modal' class='game-modal'>
+            <h2>Are you sure?</h2>
+            <h3>You won't be able to revert this</h3>
+
+            <button aria-label='Confirm Game Reset' id='confirm-button'>Yes, Reset Game!</button>
+            <button aria-label='Cancel Game Reset' id='cancel-button'>Cancel</button>
+        </div>
+        <div id='instructions-modal' class='game-modal'>
+            <h2>How To Play</h2>
+            <h3>Can you beat The Demon.</h3>
+            <h3>The goal of this game is to get as many points as possible but without going over 21 points,</h3>
+            <h3>because then you will automatically lose the hand!</h3>
+            <h3>Press the 'NEW HAND' button to start a new round:</h3>
+            <h3>Then based on your cards score either click the 'HIT' button or 'STAY' button </h3>
+            <h3>The 'HIT' button turns over a new card to your hand</h3>
+            <h3>The 'STAY' button stops play for you and lets the Demon play</h3>
+            <h3>Then it will be my turn to beat your score!</h3>
+            <h3>The first one to win 5 rounds will be the final winner.</h3>
+            
+            <button aria-label='Thumbs up, good luck!' id='instructions-good-luck-button' class='good-luck-button'><i class="fa fa-thumbs-up"></i> GOOD
+                LUCK!</button>
+        </div>
+        <div id='card-values-modal' class='game-modal'>
+            <h2>Card Values</h2>
+            <h3>Ace (A): 11 points or 1 point if you go over 21.</h3>
+            <h3>Court cards (J, Q and K) = 10 points.</h3>
+            <h3>Rest of the deck = card points.</h3>
+            <h3>The card suit (♠️, ♥️, ♣️, ♦️) has no influence on the outcome.</h3>
+
+            <button aria-label='Thumbs up, good luck!' id='card-value-good-luck-button' class='good-luck-button'><i class="fa fa-thumbs-up"></i> GOOD
+                LUCK!</button>
+
+        </div>
+    </section>
     <footer>
         <button aria-label='Instructions' id='instructions-button' class='admin-buttons'>Instructions</button>
         <button aria-label='Card Values' id='rules-button' class='admin-buttons'>Card Values</button>
@@ -74,8 +109,6 @@
     <script src='assets/js/scripts.js'></script>
     <!-- Font Awesome link -->
     <script src="https://kit.fontawesome.com/cd8a454e0f.js" crossorigin="anonymous"></script>
-    <!-- Sweet alert library -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

@@ -60,13 +60,12 @@ ___
 
 # Technology
 
-+ HTML
-+ CSS
-+ Javascript
-+ Gitpod
-+ Github
-+ Sweet Alert2 
-+ Deck of Cards API
++ HTML - for building the UI
++ CSS - for styling the UI
++ Javascript - for the the game play and interaction
++ Gitpod - for the game development
++ Github Pages - as the game host
++ Deck of Cards API - to create the cards and shuffle the decks
 ___
 
 # Testing
@@ -82,6 +81,28 @@ ___
 
 ![alt text](docs/screenshots/reponsive-screenshot-new.png "Screen shot of the Lighthouse results")
 ___
+
+# Testing Sequence
+
++ Game Play
+  + Click the New Hand button to start a game
+  + 2 cards should be dealt to the player and the demon
+  + The dealers first card should be turned over so it cannot be seen
+  + Click the hit button to get a new players card
+  + Click the stay button to stop playing
+  + The demon should now play until he draws more than 17 or equal
+  + If the player has a higher score but not over 21 the player should win the round
+  + If the score is equal then it's a tie and the voiceover should play "it's a tie"
+  + If the demon has a higher score then the player loses the round
+  + Click the reset game button to start a new game
+  + The reset game warning should popup when the reset game button is clicked, this can be confirmed or cancelled
+  + The game is over if the player wins or loses 5 rounds
+  + The Game Over overlay can be clicked to reset the game
+
++ Instructions
+  + The instructions button should open the popup modal with the game instructions when clicked
+  + The card value button should open the card value instructions when clicked
+
 # Validator Testing
 
 + HTML
@@ -121,6 +142,5 @@ The live link can be found here - <https://artcuddy.github.io/project2-blackjack
 
 + Media and Libraries
   + Background digital artwork of King Dice created by my son Alfie Cuddy (12 Years Old)
-  + Popup notifications created with [Sweet Alert 2](https://sweetalert2.github.io/ "Sweet Alert 2")
   + Inspiration for the game build from this tutorial by Ethan Jarrel on [Hackernoon](https://hackernoon.com/blackjack-application-with-javascript-2c76db51dea7 "Hackernoon") 
   + Cards created with [Deck of Cards API](https://deckofcardsapi.com/ "Deck of Cards API")
