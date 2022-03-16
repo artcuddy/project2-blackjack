@@ -177,6 +177,6 @@ The live link can be found here - <https://artcuddy.github.io/project2-blackjack
   + All fonts are from [Google Fonts](https://fonts.google.com/ "Google Fonts")
 
 + Media and Libraries
-  + Background digital artwork of King Dice created by my son Alfie Cuddy (12 Years Old)
+  + Digital artwork of King Dice created by my son Alfie Cuddy (12 Years Old)
   + Inspiration for the game build from this tutorial by Ethan Jarrel on [Hackernoon](https://hackernoon.com/blackjack-application-with-javascript-2c76db51dea7 "Hackernoon") 
   + Cards created with [Deck of Cards API](https://deckofcardsapi.com/ "Deck of Cards API")
