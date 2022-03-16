@@ -19,19 +19,19 @@ Offer the puclic a free game, easy to use to enjoy a game of BlackJack.
 
   + Game area where the cards are displayed
 
-  + Four Game buttons to Reset Game, New Hand, Hit & Stay
+  + Four Game buttons to Reset Game, Deal, Hit & Stay
   
-  + Two information buttons, One for the game instructions and the other for the Card Values in the game
+  + Two information buttons, One for the game instructions and the other for the card values in the game
 
   + Clicking on the instruction button shows information on how to play the game
 
   + Clicking on the card value button shows information on the value of the cards in the game
 
-  + Sounds are played when pressing the hit, stay & reset game buttons
+  + Sounds are played when pressing the deal, hit, stay & reset game buttons
 
   + The game is over when you win or lose 5 games
 
-  + When you win or lose an overlay screen will be shown indicating that the game is over and sound is played.
+  + When you win or lose an overlay screen will be shown indicating that the game is over and a sound is played.
 
 ![alt text](docs/screenshots/game-area.png "Screenshot game buttons")
 
