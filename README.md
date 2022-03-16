@@ -64,7 +64,7 @@ ___
 + CSS - for styling the UI
 + Javascript - for the the game play and interaction
 + Gitpod - for the game development
-+ Github Pages - as the game host
++ Github Pages - to host the game
 + Deck of Cards API - to create the cards and shuffle the decks
 ___
 
@@ -85,23 +85,55 @@ ___
 # Testing Sequence
 
 + Game Play
-  + Click the New Hand button to start a game
+  + Click the Deal button to start a game
   + 2 cards should be dealt to the player and the demon
-  + The dealers first card should be turned over so it cannot be seen
+  + The Demons first card should be turned over so it cannot be seen
   + Click the hit button to get a new players card
   + Click the stay button to stop playing
   + The demon should now play until he draws more than 17 or equal
+  + If the demon gets more than 21 he busts and the player should win the round
+
+  ![alt text](docs/screenshots/demon-bust-screenshot.png "Screen shot of the demon busts message")
+
+  + If the player gets more than 21 he busts and the demon should win the round
+
+  ![alt text](docs/screenshots/player-bust-screenshot.png "Screen shot of the player busts message")
+  
   + If the player has a higher score but not over 21 the player should win the round
+
+  ![alt text](docs/screenshots/you-won-screenshot.png "Screen shot of the you won message")
+
   + If the score is equal then it's a tie and the voiceover should play "it's a tie"
+
+  ![alt text](docs/screenshots/its-a-tie-screenshot.png "Screen shot of the it's a tie message")
+
   + If the demon has a higher score then the player loses the round
+
+  ![alt text](docs/screenshots/you-lost-screenshot.png "Screen shot of the you lost message")
+
   + Click the reset game button to start a new game
+
   + The reset game warning should popup when the reset game button is clicked, this can be confirmed or cancelled
+
+  ![alt text](docs/screenshots/reset-game-screenshot.png "Screen shot of the reset game warning")
+
   + The game is over if the player wins or loses 5 rounds
+
+  ![alt text](docs/screenshots/game-over-you-win-screenshot.png "Screen shot of the game over you win warning")
+
   + The Game Over overlay can be clicked to reset the game
+
+  ![alt text](docs/screenshots/gameover-you-lose-screenshot.png "Screen shot of the game over you lost warning")
+
 
 + Instructions
   + The instructions button should open the popup modal with the game instructions when clicked
+  
+  ![alt text](docs/screenshots/instructions-screenshot.png "Screen shot of the instructions")
+
   + The card value button should open the card value instructions when clicked
+
+  ![alt text](docs/screenshots/card-values-screenshot.png "Screen shot of the Card Values")
 
 # Validator Testing
 
@@ -124,12 +156,14 @@ None found at the moment.
   ___
 # Deployment
 
-+ The site was deployed to GitHub pages. The steps to deploy are as follows:
++ The game site was deployed to GitHub pages. The steps to deploy are as follows:
   + In the GitHub repository, navigate to the Settings tab, click the Pages button on the left menu
   + From the source section drop-down menu, select the Master Branch
   + Once the master branch has been selected and saved, the page will be automatically refreshed with a detailed ribbon display to indicate the successful deployment.
 
 ![alt text](docs/screenshots/github-pages.png "Screen shot of the Github Pages")
+
++ The game site was developed on Gitpod. 
 
 The live link can be found here - <https://artcuddy.github.io/project2-blackjack/>
 
